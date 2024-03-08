@@ -1,18 +1,29 @@
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
 using GYM_Nutrition_Union.Application.Interfaces;
+using GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces;
 using GYM_Nutrition_Union.Persistence.Context;
 using GYM_Nutrition_Union.Persistence.Repositories;
+using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<GYM_Nutrition_Context>();
 builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+builder.Services.AddScoped(typeof(IExerciseDetailRepository),typeof(ExerciseDetailRepository));
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
 builder.Services.AddScoped<RemoveExerciseCommandHandler>();
 builder.Services.AddScoped<UpdateExerciseCommandHandle>();
 builder.Services.AddScoped<CreateExerciseCommandHandler>();
+
+builder.Services.AddScoped<GetExerciseDetailByIdQueryHandler>();
+builder.Services.AddScoped<GetExerciseDetailQueryHandler>();
+builder.Services.AddScoped<RemoveExerciseDetailCommandHandler>();
+builder.Services.AddScoped<UpdateExerciseDetailCommandHandler>();
+builder.Services.AddScoped<CreateExerciseDetailCommandHandler>();
+builder.Services.AddScoped<GetExerciseDetailWithExerciseNameQueryHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
