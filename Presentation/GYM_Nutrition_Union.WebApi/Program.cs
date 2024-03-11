@@ -1,3 +1,4 @@
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
 using GYM_Nutrition_Union.Application.Interfaces;
@@ -24,6 +25,12 @@ builder.Services.AddScoped<RemoveExerciseDetailCommandHandler>();
 builder.Services.AddScoped<UpdateExerciseDetailCommandHandler>();
 builder.Services.AddScoped<CreateExerciseDetailCommandHandler>();
 builder.Services.AddScoped<GetExerciseDetailWithExerciseNameQueryHandler>();
+
+builder.Services.AddScoped<GetAppUserByIdQueryHandler>();
+builder.Services.AddScoped<GetAppUserQueryHandler>();
+builder.Services.AddScoped<RemoveAppUserCommandHandler>();
+builder.Services.AddScoped<UpdateAppUserCommandHandler>();
+builder.Services.AddScoped<CreateAppUserCommandHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
