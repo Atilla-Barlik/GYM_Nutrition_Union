@@ -16,5 +16,14 @@ namespace GYM_Nutrition_Union.Persistence.Context
 		}
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExerciseDetail> ExerciseDetails{ get; set; }
+		public DbSet<AppUser> AppUsers { get; set; }
+		public DbSet<AppUserDetail> AppUsersDetail { get; set; }
+		public DbSet<AppUserBodyDetail> AppUsersBodyDetail { get; set;}
+		public DbSet<AppUserBodyMassIndex> AppUsersBodyMassIndex { get; set; }
+		public DbSet<AppUserExerciseProgram> AppUsersExerciseProgram { get; set; }
+		public DbSet<AppUserTrainingTime> AppUsersTrainingTime { get; set;}
+		public DbSet<DailyNutrition> DailyNutrition { get; set; }
+		public DbSet<DailyNutritionDetails> DailyNutritionDetails { get; set; }
+		
 	}
 }
