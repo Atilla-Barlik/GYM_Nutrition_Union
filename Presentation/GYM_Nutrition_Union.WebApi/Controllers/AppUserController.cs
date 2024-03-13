@@ -1,10 +1,6 @@
 ﻿using GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserCommands;
-using GYM_Nutrition_Union.Application.Features.CQRS.Commands.ExerciseCommands;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
-using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.AppUserQueries;
-using GYM_Nutrition_Union.Application.Features.CQRS.Queries.ExerciseQueries;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Nutrition_Union.WebApi.Controllers
