@@ -1,0 +1,61 @@
+﻿using GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserExerciseProgramCommands;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Queries.AppUserExerciseProgramQueries;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace GYM_Nutrition_Union.WebApi.Controllers
+{
+	[Route("api/[controller]")]
+	[ApiController]
+	public class AppUserExerciseProgramController : ControllerBase
+	{
+		private readonly CreateAppUserExerciseProgramCommandHandler _createAppUserExerciseProgramCommandHandler;
+		private readonly UpdateAppUserExerciseProgramCommandHandler _updateAppUserExerciseProgramCommandHandler;
+		private readonly RemoveAppUserExerciseProgramCommandHandler _removeAppUserExerciseProgramCommandHandler;
+		private readonly GetAppUserExerciseProgramByIdQueryHandler _getAppUserExerciseProgramByIdQueryHandler;
+		private readonly GetAppUserExerciseProgramQueryHandler _getAppUserExerciseProgramQueryHandler;
+
+
+		public AppUserExerciseProgramController(CreateAppUserExerciseProgramCommandHandler createAppUserExerciseProgramCommandHandler, UpdateAppUserExerciseProgramCommandHandler updateAppUserExerciseProgramCommandHandler, RemoveAppUserExerciseProgramCommandHandler removeAppUserExerciseProgramCommandHandler, GetAppUserExerciseProgramByIdQueryHandler getAppUserExerciseProgramByIdQueryHandler, GetAppUserExerciseProgramQueryHandler getAppUserExerciseProgramQueryHandler)
+		{
+			_createAppUserExerciseProgramCommandHandler = createAppUserExerciseProgramCommandHandler;
+			_updateAppUserExerciseProgramCommandHandler = updateAppUserExerciseProgramCommandHandler;
+			_removeAppUserExerciseProgramCommandHandler = removeAppUserExerciseProgramCommandHandler;
+			_getAppUserExerciseProgramByIdQueryHandler = getAppUserExerciseProgramByIdQueryHandler;
+			_getAppUserExerciseProgramQueryHandler = getAppUserExerciseProgramQueryHandler;
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> AppUserExerciseProgramList()
+		{
+			var values = await _getAppUserExerciseProgramQueryHandler.Handle();
+			return Ok(values);
+		}
+
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetAppUserExerciseProgram(int id)
+		{
+			var value = await _getAppUserExerciseProgramByIdQueryHandler.Handle(new GetAppUserExerciseProgramByIdQuery(id));
+			return Ok(value);
+		}
+		[HttpPost]
+		public async Task<IActionResult> CreateAppUserExerciseProgram(CreateAppUserExerciseProgramCommand command)
+		{
+			await _createAppUserExerciseProgramCommandHandler.Handle(command);
+			return Ok("AppUserExerciseProgram Eklendi.");
+		}
+		[HttpDelete]
+		public async Task<IActionResult> RemoveAppUserExerciseProgram(int id)
+		{
+			await _removeAppUserExerciseProgramCommandHandler.Handle(new RemoveAppUserExerciseProgramCommand(id));
+			return Ok("AppUserExerciseProgram Silindi.");
+		}
+		[HttpPut]
+		public async Task<IActionResult> UpdateAppUserExerciseProgram(UpdateAppUserExerciseProgramCommand command)
+		{
+			await _updateAppUserExerciseProgramCommandHandler.Handle(command);
+			return Ok("AppUserExerciseProgram Güncellendi.");
+		}
+	}
+}

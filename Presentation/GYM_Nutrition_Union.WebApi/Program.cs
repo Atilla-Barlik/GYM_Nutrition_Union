@@ -1,6 +1,7 @@
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyMassIndexHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
@@ -52,6 +53,12 @@ builder.Services.AddScoped<GetAppUserBodyMassIndexQueryHandler>();
 builder.Services.AddScoped<RemoveAppUserBodyMassIndexCommandHandler>();
 builder.Services.AddScoped<UpdateAppUserBodyMassIndexCommandHandler>();
 builder.Services.AddScoped<CreateAppUserBodyMassIndexCommandHandler>();
+
+builder.Services.AddScoped<GetAppUserExerciseProgramByIdQueryHandler>();
+builder.Services.AddScoped<GetAppUserExerciseProgramQueryHandler>();
+builder.Services.AddScoped<RemoveAppUserExerciseProgramCommandHandler>();
+builder.Services.AddScoped<UpdateAppUserExerciseProgramCommandHandler>();
+builder.Services.AddScoped<CreateAppUserExerciseProgramCommandHandler>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
