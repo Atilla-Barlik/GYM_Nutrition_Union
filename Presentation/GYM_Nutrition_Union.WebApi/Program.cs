@@ -4,6 +4,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHandle
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTrainingTimeHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
 using GYM_Nutrition_Union.Application.Interfaces;
@@ -66,6 +67,12 @@ builder.Services.AddScoped<GetAppUserTrainingTimeQueryHandler>();
 builder.Services.AddScoped<RemoveAppUserTrainingTimeCommandHandler>();
 builder.Services.AddScoped<UpdateAppUserTrainingTimeCommandHandler>();
 builder.Services.AddScoped<CreateAppUserTrainingTimeCommandHandler>();
+
+builder.Services.AddScoped<GetDailyNutritionByIdQueryHandler>();
+builder.Services.AddScoped<GetDailyNutritionQueryHandler>();
+builder.Services.AddScoped<RemoveDailyNutritionCommandHandler>();
+builder.Services.AddScoped<UpdateDailyNutritionCommandHandler>();
+builder.Services.AddScoped<CreateDailyNutritionCommandHandler>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
