@@ -4,6 +4,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHandle
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTrainingTimeHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
@@ -12,6 +13,7 @@ using GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces;
 using GYM_Nutrition_Union.Persistence.Context;
 using GYM_Nutrition_Union.Persistence.Repositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
+using GYM_NutritionDetails_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,6 +75,12 @@ builder.Services.AddScoped<GetDailyNutritionQueryHandler>();
 builder.Services.AddScoped<RemoveDailyNutritionCommandHandler>();
 builder.Services.AddScoped<UpdateDailyNutritionCommandHandler>();
 builder.Services.AddScoped<CreateDailyNutritionCommandHandler>();
+
+builder.Services.AddScoped<GetDailyNutritionDetailByIdQueryHandler>();
+builder.Services.AddScoped<GetDailyNutritionDetailQueryHandler>();
+builder.Services.AddScoped<RemoveDailyNutritionDetailCommandHandler>();
+builder.Services.AddScoped<UpdateDailyNutritionDetailCommandHandler>();
+builder.Services.AddScoped<CreateDailyNutritionDetailCommandHandler>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
