@@ -3,6 +3,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyMassInde
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTrainingTimeHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
 using GYM_Nutrition_Union.Application.Interfaces;
@@ -59,6 +60,12 @@ builder.Services.AddScoped<GetAppUserExerciseProgramQueryHandler>();
 builder.Services.AddScoped<RemoveAppUserExerciseProgramCommandHandler>();
 builder.Services.AddScoped<UpdateAppUserExerciseProgramCommandHandler>();
 builder.Services.AddScoped<CreateAppUserExerciseProgramCommandHandler>();
+
+builder.Services.AddScoped<GetAppUserTrainingTimeByIdQueryHandler>();
+builder.Services.AddScoped<GetAppUserTrainingTimeQueryHandler>();
+builder.Services.AddScoped<RemoveAppUserTrainingTimeCommandHandler>();
+builder.Services.AddScoped<UpdateAppUserTrainingTimeCommandHandler>();
+builder.Services.AddScoped<CreateAppUserTrainingTimeCommandHandler>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
