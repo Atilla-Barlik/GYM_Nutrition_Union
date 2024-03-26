@@ -10,6 +10,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandl
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
 using GYM_Nutrition_Union.Application.Interfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces;
+using GYM_Nutrition_Union.Application.Services;
 using GYM_Nutrition_Union.Persistence.Context;
 using GYM_Nutrition_Union.Persistence.Repositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
@@ -19,6 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<GYM_Nutrition_Context>();
+builder.Services.AddApplicationService(builder.Configuration);
 builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
 builder.Services.AddScoped(typeof(IExerciseDetailRepository),typeof(ExerciseDetailRepository));
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
@@ -81,6 +83,8 @@ builder.Services.AddScoped<GetDailyNutritionDetailQueryHandler>();
 builder.Services.AddScoped<RemoveDailyNutritionDetailCommandHandler>();
 builder.Services.AddScoped<UpdateDailyNutritionDetailCommandHandler>();
 builder.Services.AddScoped<CreateDailyNutritionDetailCommandHandler>();
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
