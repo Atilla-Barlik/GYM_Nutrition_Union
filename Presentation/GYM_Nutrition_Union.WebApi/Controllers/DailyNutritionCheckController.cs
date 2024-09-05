@@ -16,7 +16,7 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
         }
 
         [HttpGet("{userId}/{date}")]
-        public async Task<IActionResult> GetDailyNutrition(int userId, DateTime date)
+        public async Task<IActionResult> GetDailyNutrition(int userId, DateOnly date)
         {
             var dailyNutrition = await _queryHandler.Handle(userId, date);
 
@@ -25,7 +25,7 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
                 return NotFound(false);
             }
 
-            return Ok(true);
+            return Ok(dailyNutrition);
         }
     }
 }

@@ -15,11 +15,13 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionH
 
 		public async Task Handle(UpdateDailyNutritionCommand command)
 		{
-			var values = await _repository.GetByIdAsync(command.DailyNutritionID);
+            DateTime dateTime = DateTime.Now;
+            DateOnly dateOnly = DateOnly.FromDateTime(dateTime);
+            var values = await _repository.GetByIdAsync(command.DailyNutritionID);
 			values.DailyNutritionID = command.DailyNutritionID;
 			values.AppUserId = command.AppUserId;
-			values.Date = command.Date;
-			values.DailyNutritionTotalKcal = command.DailyNutritionTotalKcal;
+			values.Date = dateOnly;
+            values.DailyNutritionTotalKcal = command.DailyNutritionTotalKcal;
 			values.DailyNutritionTotalCarbohydrate = command.DailyNutritionTotalCarbohydrate;
 			values.DailyNutritionTotalFat = command.DailyNutritionTotalFat;
 			values.DailyNutritionTotalProtein = command.DailyNutritionTotalProtein;

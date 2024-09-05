@@ -26,7 +26,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTraining
 			{
 				AppUserTrainingTimeId = values.AppUserTrainingTimeId,
 				AppUserId = values.AppUserId,
-				Date = values.Date,
+				Time = values.Time,
 				TotalKcalBurned = values.TotalKcalBurned,
 				TotalTrainingTime = values.TotalTrainingTime
 			};

@@ -15,6 +15,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionH
 
 		public async Task Handle(CreateDailyNutritionCommand command)
 		{
+			DateTime dateTime = DateTime.Now;
+			DateOnly dateOnly = DateOnly.FromDateTime(dateTime);
 			await _repository.CreateAsync(new DailyNutrition
 			{
 				AppUserId = command.AppUserId,
@@ -23,7 +25,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionH
 				DailyNutritionTotalProtein = command.DailyNutritionTotalProtein,
 				DailyNutritionTotalFat = command.DailyNutritionTotalFat,
 				DailyNutritionTotalKcal = command.DailyNutritionTotalKcal,
-				Date = command.Date
+				Date = dateOnly
 			});
 		}
 	}

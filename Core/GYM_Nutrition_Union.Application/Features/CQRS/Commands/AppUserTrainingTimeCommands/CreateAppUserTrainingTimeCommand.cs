@@ -10,7 +10,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserTraining
 	{
 		public int TotalTrainingTime { get; set; }
 		public int TotalKcalBurned { get; set; }
-		public DateTime Date { get; set; }
+		public TimeSpan Time{ get; set; }
 		public int AppUserId { get; set; }
 	}
 }

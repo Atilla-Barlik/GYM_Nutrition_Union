@@ -25,7 +25,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionD
 				NutrientKcal = x.NutrientKcal,
 				NutrientCarbohydrate = x.NutrientCarbohydrate,
 				NutrientProtein = x.NutrientProtein,
-				NutrientFat = x.NutrientFat
+				NutrientFat = x.NutrientFat,
+				DailyMealTime = x.DailyMealTime,
 			}).ToList();
 		}
 	}

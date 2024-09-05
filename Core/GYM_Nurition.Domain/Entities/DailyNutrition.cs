@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace GYM_Nurition.Domain.Entities
 		public decimal DailyNutritionTotalCarbohydrate { get; set; }
 		public decimal DailyNutritionTotalProtein { get; set; }
 		public decimal DailyNutritionTotalFat { get; set; }
-		public DateTime Date { get; set; }
+		public DateOnly Date { get; set; } 
 		public AppUser AppUser { get; set; }
 		public int AppUserId { get; set; }
 		public List<DailyNutritionDetails> DailyNutritionDetails { get; set; }

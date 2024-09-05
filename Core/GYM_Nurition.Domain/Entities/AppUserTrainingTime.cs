@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace GYM_Nurition.Domain.Entities
         public int AppUserTrainingTimeId { get; set; }
         public int TotalTrainingTime { get; set; }
         public int TotalKcalBurned { get; set; }
-        public DateTime Date { get; set; }
+        public  TimeSpan Time { get; set; }
         public AppUser AppUser { get; set; }
         public int AppUserId { get; set; }
     }

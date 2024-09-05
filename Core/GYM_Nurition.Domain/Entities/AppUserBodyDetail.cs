@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,8 @@ namespace GYM_Nurition.Domain.Entities
 	public class AppUserBodyDetail
 	{
         public int AppUserBodyDetailId { get; set; }
-		public DateTime Date { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime Date { get; set; }
         public int Chest { get; set; }
         public int LeftArm { get; set; }
         public int RightArm { get; set; }

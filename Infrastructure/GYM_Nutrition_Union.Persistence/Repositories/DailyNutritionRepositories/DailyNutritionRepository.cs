@@ -19,10 +19,10 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionRepositorie
             _context = context;
         }
 
-        public async Task<DailyNutrition> GetDailyNutritionByUserIdAndDateAsync(int userId, DateTime date)
+        public async Task<DailyNutrition> GetDailyNutritionByUserIdAndDateAsync(int userId, DateOnly date)
         {
             return await _context.DailyNutrition
-                                 .FirstOrDefaultAsync(dn => dn.AppUserId == userId && dn.Date.Date == date.Date);
+                                 .FirstOrDefaultAsync(dn => dn.AppUserId == userId && dn.Date == date);
         }
 
         public async Task AddDailyNutritionAsync(DailyNutrition dailyNutrition)

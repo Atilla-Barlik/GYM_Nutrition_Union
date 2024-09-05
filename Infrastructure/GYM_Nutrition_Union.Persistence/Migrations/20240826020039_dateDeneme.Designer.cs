@@ -4,6 +4,7 @@ using GYM_Nutrition_Union.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Nutrition_Union.Persistence.Migrations
 {
     [DbContext(typeof(GYM_Nutrition_Context))]
-    partial class GYM_Nutrition_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240826020039_dateDeneme")]
+    partial class dateDeneme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,9 +275,6 @@ namespace GYM_Nutrition_Union.Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DailyNutritionDetailsId"));
-
-                    b.Property<int>("DailyMealTime")
-                        .HasColumnType("int");
 
                     b.Property<int>("DailyNutritionId")
                         .HasColumnType("int");

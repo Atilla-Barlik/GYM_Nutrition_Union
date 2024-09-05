@@ -23,7 +23,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTraining
 			await _repository.CreateAsync(new AppUserTrainingTime
 			{
 				AppUserId = command.AppUserId,
-				Date = command.Date,
+				Time = command.Time,
 				TotalKcalBurned = command.TotalKcalBurned,
 				TotalTrainingTime = command.TotalTrainingTime,
 			});

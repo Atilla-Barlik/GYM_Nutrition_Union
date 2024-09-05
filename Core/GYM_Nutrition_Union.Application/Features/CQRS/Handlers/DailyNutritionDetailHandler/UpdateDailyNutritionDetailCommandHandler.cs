@@ -24,6 +24,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionD
 			values.NutrientCarbohydrate = command.NutrientCarbohydrate;
 			values.NutrientFat = command.NutrientFat;
 			values.NutrientProtein = command.NutrientProtein;
+			values.DailyMealTime = command.DailyMealTime;
 			await _repository.UpdateAsync(values);
 		}
 	}

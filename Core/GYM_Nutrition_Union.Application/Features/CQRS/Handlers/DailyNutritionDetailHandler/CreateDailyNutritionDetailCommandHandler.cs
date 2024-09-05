@@ -23,7 +23,8 @@ namespace GYM_NutritionDetails_Union.Application.Features.CQRS.Handlers.DailyNut
 				NutrientKcal = command.NutrientKcal,
 				NutrientCarbohydrate = command.NutrientCarbohydrate,
 				NutrientProtein	= command.NutrientProtein,
-				NutrientFat = command.NutrientFat
+				NutrientFat = command.NutrientFat,
+				DailyMealTime = command.DailyMealTime
 			});
 		}
 	}

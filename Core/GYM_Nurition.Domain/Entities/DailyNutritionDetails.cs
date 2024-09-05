@@ -17,5 +17,6 @@ namespace GYM_Nurition.Domain.Entities
         public decimal NutrientFat { get; set; }
         public DailyNutrition DailyNutrition { get; set; }
         public int DailyNutritionId { get; set; }
+        public int DailyMealTime { get; set; }
     }
 }

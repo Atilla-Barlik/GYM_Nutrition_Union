@@ -14,7 +14,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionH
         public class GetDailyNutritionByUserIdAndDateQuery : IRequest<DailyNutrition>
         {
             public int AppUserId { get; set; }
-            public DateTime Date { get; set; }
+            public DateOnly Date { get; set; }
         }
         private readonly IDailyNutritionRepository _dailyNutritionRepository;
 
@@ -23,7 +23,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionH
             _dailyNutritionRepository = dailyNutritionRepository;
         }
 
-        public async Task<DailyNutrition> Handle(int userId, DateTime date)
+        public async Task<DailyNutrition> Handle(int userId, DateOnly date)
         {
             return await _dailyNutritionRepository.GetDailyNutritionByUserIdAndDateAsync(userId, date);
         }

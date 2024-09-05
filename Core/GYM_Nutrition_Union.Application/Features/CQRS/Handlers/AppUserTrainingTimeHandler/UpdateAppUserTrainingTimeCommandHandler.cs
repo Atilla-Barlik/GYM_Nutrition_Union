@@ -23,7 +23,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTraining
 			var values = await _repository.GetByIdAsync(command.AppUserTrainingTimeId);
 			values.AppUserTrainingTimeId = command.AppUserTrainingTimeId;
 			values.AppUserId = command.AppUserId;
-			values.Date = command.Date;
+			values.Time = command.Time;
 			values.TotalKcalBurned = command.TotalKcalBurned;
 			values.TotalTrainingTime = command.TotalTrainingTime;
 			await _repository.UpdateAsync(values);
