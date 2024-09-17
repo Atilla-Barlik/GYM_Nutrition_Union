@@ -33,6 +33,7 @@ builder.Services.AddScoped(typeof(IDailyNutritionRepository),typeof(DailyNutriti
 builder.Services.AddScoped(typeof(IExerciseDetailRepository),typeof(ExerciseDetailRepository));
 builder.Services.AddScoped(typeof(IDailyMealTotalsRespository), typeof(DailyMealTotalRepository));
 builder.Services.AddScoped(typeof(ITop10UsageNutritionRepository), typeof(Top10UsageNutritionRepository));
+builder.Services.AddScoped(typeof(IUserTop10UsageNutrientRepository), typeof(UserTop10UsageNutrientRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -107,6 +108,7 @@ builder.Services.AddScoped<GetNutrientTotalsHandler>();
 
 builder.Services.AddScoped<GetTop10NutrientsQueryHandler>();
 
+builder.Services.AddScoped<GetUserMostUsedNutrientsQueryHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
