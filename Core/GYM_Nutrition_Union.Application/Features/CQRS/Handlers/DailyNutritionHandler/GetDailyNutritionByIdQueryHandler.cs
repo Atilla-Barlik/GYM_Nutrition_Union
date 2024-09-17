@@ -5,11 +5,11 @@ using GYM_Nutrition_Union.Application.Interfaces;
 
 namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionHandler
 {
-	public class GetDailyNutritionByIdQueryHandler
+	public class GetDailyNutrientByIdQueryHandler
 	{
 		private readonly IRepository<DailyNutrition> _repository;
 
-		public GetDailyNutritionByIdQueryHandler(IRepository<DailyNutrition> repository)
+		public GetDailyNutrientByIdQueryHandler(IRepository<DailyNutrition> repository)
 		{
 			_repository = repository;
 		}

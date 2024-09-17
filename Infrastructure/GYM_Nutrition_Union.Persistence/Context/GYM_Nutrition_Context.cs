@@ -24,6 +24,7 @@ namespace GYM_Nutrition_Union.Persistence.Context
 		public DbSet<AppUserTrainingTime> AppUsersTrainingTime { get; set;}
 		public DbSet<DailyNutrition> DailyNutrition { get; set; }
 		public DbSet<DailyNutritionDetails> DailyNutritionDetails { get; set; }	
+		public DbSet<Nutrient> Nutrient { get; set; }
 		
 
 	}

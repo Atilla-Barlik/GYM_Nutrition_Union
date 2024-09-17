@@ -12,11 +12,11 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		private readonly CreateDailyNutritionCommandHandler _createDailyNutritionCommandHandler;
 		private readonly UpdateDailyNutritionCommandHandler _updateDailyNutritionCommandHandler;
 		private readonly RemoveDailyNutritionCommandHandler _removeDailyNutritionCommandHandler;
-		private readonly GetDailyNutritionByIdQueryHandler _getDailyNutritionByIdQueryHandler;
+		private readonly GetDailyNutrientByIdQueryHandler _getDailyNutritionByIdQueryHandler;
 		private readonly GetDailyNutritionQueryHandler _getDailyNutritionQueryHandler;
 		
 
-		public DailyNutritionController(CreateDailyNutritionCommandHandler createDailyNutritionCommandHandler, UpdateDailyNutritionCommandHandler updateDailyNutritionCommandHandler, RemoveDailyNutritionCommandHandler removeDailyNutritionCommandHandler, GetDailyNutritionByIdQueryHandler getDailyNutritionByIdQueryHandler, GetDailyNutritionQueryHandler getDailyNutritionQueryHandler)
+		public DailyNutritionController(CreateDailyNutritionCommandHandler createDailyNutritionCommandHandler, UpdateDailyNutritionCommandHandler updateDailyNutritionCommandHandler, RemoveDailyNutritionCommandHandler removeDailyNutritionCommandHandler, GetDailyNutrientByIdQueryHandler getDailyNutritionByIdQueryHandler, GetDailyNutritionQueryHandler getDailyNutritionQueryHandler)
 		{
 			_createDailyNutritionCommandHandler = createDailyNutritionCommandHandler;
 			_updateDailyNutritionCommandHandler = updateDailyNutritionCommandHandler;
@@ -43,19 +43,19 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		public async Task<IActionResult> CreateDailyNutrition(CreateDailyNutritionCommand command)
 		{
 			await _createDailyNutritionCommandHandler.Handle(command);
-			return Ok("Egzersiz Eklendi.");
+			return Ok("Besin Eklendi.");
 		}
 		[HttpDelete]
 		public async Task<IActionResult> RemoveDailyNutrition(int id)
 		{
 			await _removeDailyNutritionCommandHandler.Handle(new RemoveDailyNutritionCommand(id));
-			return Ok("Egzersiz Silindi.");
+			return Ok("Besin Silindi.");
 		}
 		[HttpPut]
 		public async Task<IActionResult> UpdateDailyNutrition(UpdateDailyNutritionCommand command)
 		{
 			await _updateDailyNutritionCommandHandler.Handle(command);
-			return Ok("Egzersiz Güncellendi.");
+			return Ok("Besin Güncellendi.");
 		}
 		
 	}

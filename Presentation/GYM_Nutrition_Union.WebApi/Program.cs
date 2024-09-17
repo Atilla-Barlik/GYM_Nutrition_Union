@@ -8,6 +8,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionDetai
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientTotalsHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetNutrientTotalsQueries;
 using GYM_Nutrition_Union.Application.Interfaces;
@@ -82,7 +83,7 @@ builder.Services.AddScoped<RemoveAppUserTrainingTimeCommandHandler>();
 builder.Services.AddScoped<UpdateAppUserTrainingTimeCommandHandler>();
 builder.Services.AddScoped<CreateAppUserTrainingTimeCommandHandler>();
 
-builder.Services.AddScoped<GetDailyNutritionByIdQueryHandler>();
+builder.Services.AddScoped<GetDailyNutrientByIdQueryHandler>();
 builder.Services.AddScoped<GetDailyNutritionQueryHandler>();
 builder.Services.AddScoped<RemoveDailyNutritionCommandHandler>();
 builder.Services.AddScoped<UpdateDailyNutritionCommandHandler>();
@@ -93,6 +94,12 @@ builder.Services.AddScoped<GetDailyNutritionDetailQueryHandler>();
 builder.Services.AddScoped<RemoveDailyNutritionDetailCommandHandler>();
 builder.Services.AddScoped<UpdateDailyNutritionDetailCommandHandler>();
 builder.Services.AddScoped<CreateDailyNutritionDetailCommandHandler>();
+
+builder.Services.AddScoped<GetNutrientByIdQueryHandler>();
+builder.Services.AddScoped<GetNutrientQueryHandler>();
+builder.Services.AddScoped<RemoveNutrientCommandHandler>();
+builder.Services.AddScoped<UpdateNutrientCommandHandler>();
+builder.Services.AddScoped<CreateNutrientCommandHandler>();
 
 builder.Services.AddScoped<GetDailyNutritionByUserIdAndDateQueryHandler>();
 

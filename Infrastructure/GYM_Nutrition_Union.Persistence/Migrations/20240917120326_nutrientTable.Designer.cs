@@ -4,6 +4,7 @@ using GYM_Nutrition_Union.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Nutrition_Union.Persistence.Migrations
 {
     [DbContext(typeof(GYM_Nutrition_Context))]
-    partial class GYM_Nutrition_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240917120326_nutrientTable")]
+    partial class nutrientTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -382,66 +385,6 @@ namespace GYM_Nutrition_Union.Persistence.Migrations
                     b.HasIndex("ExerciseId");
 
                     b.ToTable("ExerciseDetails");
-                });
-
-            modelBuilder.Entity("GYM_Nurition.Domain.Entities.Nutrient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("calcium")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("carbonhydrate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("cholestrol")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("fat")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("fiber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("iron")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("kcal")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("potassium")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("protein")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("sodium")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("sugar")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("vitamin_A")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("vitamin_C")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Nutrient");
                 });
 
             modelBuilder.Entity("GYM_Nurition.Domain.Entities.AppUserBodyDetail", b =>
