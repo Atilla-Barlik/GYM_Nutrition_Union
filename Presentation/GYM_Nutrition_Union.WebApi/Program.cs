@@ -31,6 +31,7 @@ builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
 builder.Services.AddScoped(typeof(IDailyNutritionRepository),typeof(DailyNutritionRepository));
 builder.Services.AddScoped(typeof(IExerciseDetailRepository),typeof(ExerciseDetailRepository));
 builder.Services.AddScoped(typeof(IDailyMealTotalsRespository), typeof(DailyMealTotalRepository));
+builder.Services.AddScoped(typeof(ITop10UsageNutritionRepository), typeof(Top10UsageNutritionRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -96,6 +97,8 @@ builder.Services.AddScoped<CreateDailyNutritionDetailCommandHandler>();
 builder.Services.AddScoped<GetDailyNutritionByUserIdAndDateQueryHandler>();
 
 builder.Services.AddScoped<GetNutrientTotalsHandler>();
+
+builder.Services.AddScoped<GetTop10NutrientsQueryHandler>();
 
 
 builder.Services.AddControllers();
