@@ -23,6 +23,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler
 			var values = await _repository.GetByIdAsync(command.ExerciseId);
 			values.ExerciseName = command.ExerciseName;
 			values.ExerciseId = command.ExerciseId;
+			values.ExerciseImage = command.ExerciseImage;
 			await _repository.UpdateAsync(values);
 		}
 	}

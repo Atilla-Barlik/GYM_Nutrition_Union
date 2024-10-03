@@ -15,6 +15,7 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		private readonly RemoveExerciseCommandHandler _removeExerciseCommandHandler;
 		private readonly GetExerciseByIdQueryHandler _getExerciseByIdQueryHandler;
 		private readonly GetExerciseQueryHandler _getExerciseQueryHandler;
+		
 
 		public ExercisesController(CreateExerciseCommandHandler createExerciseCommandHandler, UpdateExerciseCommandHandle updateExerciseCommandHandler, RemoveExerciseCommandHandler removeExerciseCommandHandler, GetExerciseByIdQueryHandler getExerciseByIdQueryHandler, GetExerciseQueryHandler getExerciseQueryHandler)
 		{
@@ -56,5 +57,7 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 			await _updateExerciseCommandHandler.Handle(command);
 			return Ok("Egzersiz Güncellendi.");
 		}
+
+		
 	}
 }

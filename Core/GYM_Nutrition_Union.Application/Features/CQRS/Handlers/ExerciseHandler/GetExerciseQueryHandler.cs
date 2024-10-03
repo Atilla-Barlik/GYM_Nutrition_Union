@@ -24,7 +24,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler
 			return values.Select(x => new GetExerciseQueryResult
 			{
 				ExerciseId = x.ExerciseId,
-				ExerciseName = x.ExerciseName
+				ExerciseName = x.ExerciseName,
+				ExerciseImage = x.ExerciseImage
 			}).ToList();
 		}
 	}

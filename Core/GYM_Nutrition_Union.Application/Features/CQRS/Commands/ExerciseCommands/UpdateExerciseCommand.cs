@@ -6,5 +6,6 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Commands.ExerciseCommand
 	{
 		public int ExerciseId { get; set; }
 		public string ExerciseName { get; set; }
-	}
+        public string ExerciseImage { get; set; }
+    }
 }

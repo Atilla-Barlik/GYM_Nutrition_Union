@@ -10,6 +10,6 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Commands.ExerciseCommand
 	public class CreateExerciseCommand
 	{
 		public string ExerciseName { get; set; }
-		
-	}
+        public string ExerciseImage { get; set; }
+    }
 }

@@ -10,6 +10,7 @@ namespace GYM_Nurition.Domain.Entities
 	{
 		public int ExerciseId { get; set; }
 		public string ExerciseName { get; set; }
-		public List<ExerciseDetail> ExerciseDetail { get; set; }
+        public string ExerciseImage { get; set; }
+        public List<ExerciseDetail> ExerciseDetail { get; set; }
 	}
 }

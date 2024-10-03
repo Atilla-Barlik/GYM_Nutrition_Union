@@ -26,6 +26,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler
 			{
 				ExerciseId = values.ExerciseId,
 				ExerciseName = values.ExerciseName,
+				ExerciseImage = values.ExerciseImage,
 			};
 		}
 	}

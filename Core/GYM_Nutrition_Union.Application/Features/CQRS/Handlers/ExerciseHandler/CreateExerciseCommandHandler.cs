@@ -22,7 +22,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseHandler
 		{
 			await _repository.CreateAsync(new Exercise
 			{
-				ExerciseName = command.ExerciseName
+				ExerciseName = command.ExerciseName,
+				ExerciseImage = command.ExerciseImage
 			});
 		}
 	}
