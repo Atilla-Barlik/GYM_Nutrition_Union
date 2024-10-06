@@ -25,4 +25,5 @@ namespace GYM_Nurition.Domain.Entities
 		public List<AppUserExerciseProgram> AppUserExerciseProgram { get; set; }
 
     }
+
 }

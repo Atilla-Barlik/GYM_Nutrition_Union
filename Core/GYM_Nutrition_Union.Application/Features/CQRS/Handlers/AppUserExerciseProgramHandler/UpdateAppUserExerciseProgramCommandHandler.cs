@@ -20,13 +20,17 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
 
 		public async Task Handle(UpdateAppUserExerciseProgramCommand command)
 		{
-			var values = await _repository.GetByIdAsync(command.AppUserExerciseProgramId);
+            DateTime dateTime = DateTime.Now;
+            DateOnly dateOnly = DateOnly.FromDateTime(dateTime);
+            var values = await _repository.GetByIdAsync(command.AppUserExerciseProgramId);
 			values.AppUserExerciseProgramId = command.AppUserExerciseProgramId;
 			values.AppUserId = command.AppUserId;
 			values.ExerciseDetailId = command.ExerciseDetailId;
 			values.ExerciseSet = command.ExerciseSet;
 			values.ExerciseRepeat = command.ExerciseRepeat;
 			values.ExerciseTotalBurnedKcal = command.ExerciseTotalBurnedKcal;
+			values.DayNo = command.DayNo;
+			values.Date = dateOnly;
 			await _repository.UpdateAsync(values);
 		}
 	}

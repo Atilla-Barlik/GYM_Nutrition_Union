@@ -1,0 +1,18 @@
+﻿using GYM_Nurition.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GYM_Nurition.Domain.Dtos.AppUserExerciseDtos
+{
+    public class CombinedExerciseDataDto
+    {
+        public int AppUserExerciseProgramId { get; set; }
+        public int ExerciseRepeat { get; set; }
+        public int ExerciseSet { get; set; }
+        public int ExerciseTotalBurnedKcal { get; set; }
+        public ExerciseDetailDto ExerciseDetailDto { get; set; }
+    }
+}

@@ -1,6 +1,8 @@
 ﻿using GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserExerciseProgramCommands;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramDetailsHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.AppUserExerciseProgramQueries;
+using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetAppUserProgramDetailsQueries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,15 +17,17 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		private readonly RemoveAppUserExerciseProgramCommandHandler _removeAppUserExerciseProgramCommandHandler;
 		private readonly GetAppUserExerciseProgramByIdQueryHandler _getAppUserExerciseProgramByIdQueryHandler;
 		private readonly GetAppUserExerciseProgramQueryHandler _getAppUserExerciseProgramQueryHandler;
+		private readonly GetAppUserExerciseProgramDetailsQueryHandler _getAppUserExerciseProgramDetailsQueryHandler;
 
 
-		public AppUserExerciseProgramController(CreateAppUserExerciseProgramCommandHandler createAppUserExerciseProgramCommandHandler, UpdateAppUserExerciseProgramCommandHandler updateAppUserExerciseProgramCommandHandler, RemoveAppUserExerciseProgramCommandHandler removeAppUserExerciseProgramCommandHandler, GetAppUserExerciseProgramByIdQueryHandler getAppUserExerciseProgramByIdQueryHandler, GetAppUserExerciseProgramQueryHandler getAppUserExerciseProgramQueryHandler)
+		public AppUserExerciseProgramController(CreateAppUserExerciseProgramCommandHandler createAppUserExerciseProgramCommandHandler, UpdateAppUserExerciseProgramCommandHandler updateAppUserExerciseProgramCommandHandler, RemoveAppUserExerciseProgramCommandHandler removeAppUserExerciseProgramCommandHandler, GetAppUserExerciseProgramByIdQueryHandler getAppUserExerciseProgramByIdQueryHandler, GetAppUserExerciseProgramQueryHandler getAppUserExerciseProgramQueryHandler,GetAppUserExerciseProgramDetailsQueryHandler getAppUserExerciseProgramDetailsQueryHandler)
 		{
 			_createAppUserExerciseProgramCommandHandler = createAppUserExerciseProgramCommandHandler;
 			_updateAppUserExerciseProgramCommandHandler = updateAppUserExerciseProgramCommandHandler;
 			_removeAppUserExerciseProgramCommandHandler = removeAppUserExerciseProgramCommandHandler;
 			_getAppUserExerciseProgramByIdQueryHandler = getAppUserExerciseProgramByIdQueryHandler;
 			_getAppUserExerciseProgramQueryHandler = getAppUserExerciseProgramQueryHandler;
+			_getAppUserExerciseProgramDetailsQueryHandler = getAppUserExerciseProgramDetailsQueryHandler;
 		}
 
 		[HttpGet]
@@ -43,7 +47,7 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		public async Task<IActionResult> CreateAppUserExerciseProgram(CreateAppUserExerciseProgramCommand command)
 		{
 			await _createAppUserExerciseProgramCommandHandler.Handle(command);
-			return Ok("AppUserExerciseProgram Eklendi.");
+			return Ok();
 		}
 		[HttpDelete]
 		public async Task<IActionResult> RemoveAppUserExerciseProgram(int id)
@@ -57,5 +61,13 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 			await _updateAppUserExerciseProgramCommandHandler.Handle(command);
 			return Ok("AppUserExerciseProgram Güncellendi.");
 		}
-	}
+
+        [HttpGet("user-exercises/{appUserId}")]
+        public async Task<IActionResult> GetUserExercises(int appUserId)
+        {
+            var query = new GetAppUserExerciseProgramDetailsQuery(appUserId);
+            var result = await _getAppUserExerciseProgramDetailsQueryHandler.Handle(query);
+            return Ok(result);
+        }
+    }
 }

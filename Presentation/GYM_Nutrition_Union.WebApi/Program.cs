@@ -1,6 +1,7 @@
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyMassIndexHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramDetailsHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTrainingTimeHandler;
@@ -12,6 +13,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientTotalsHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetNutrientTotalsQueries;
 using GYM_Nutrition_Union.Application.Interfaces;
+using GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyMealTimeInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces;
@@ -19,11 +21,13 @@ using GYM_Nutrition_Union.Application.Interfaces.ExerciseInterfaces;
 using GYM_Nutrition_Union.Application.Services;
 using GYM_Nutrition_Union.Persistence.Context;
 using GYM_Nutrition_Union.Persistence.Repositories;
+using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMealTimeRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseRepositories;
 using GYM_NutritionDetails_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +41,7 @@ builder.Services.AddScoped(typeof(IDailyMealTotalsRespository), typeof(DailyMeal
 builder.Services.AddScoped(typeof(ITop10UsageNutritionRepository), typeof(Top10UsageNutritionRepository));
 builder.Services.AddScoped(typeof(IUserTop10UsageNutrientRepository), typeof(UserTop10UsageNutrientRepository));
 builder.Services.AddScoped(typeof(IExerciseRepository), typeof(ExerciseRepository));
+builder.Services.AddScoped(typeof(IAppUserExerciseProgramRespository), typeof(AppUserExerciseProgramRespository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -114,6 +119,15 @@ builder.Services.AddScoped<GetTop10NutrientsQueryHandler>();
 builder.Services.AddScoped<GetUserMostUsedNutrientsQueryHandler>();
 
 builder.Services.AddScoped<GetExerciseDetailsWithExerciseIdQueryHandler>();
+
+builder.Services.AddScoped<GetAppUserExerciseProgramDetailsQueryHandler>();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.MaxDepth = 64; // Veya ihtiyacýnýza göre daha yüksek bir deðer
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
