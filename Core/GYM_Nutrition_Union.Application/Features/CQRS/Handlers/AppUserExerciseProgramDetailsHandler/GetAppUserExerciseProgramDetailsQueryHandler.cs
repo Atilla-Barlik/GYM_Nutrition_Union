@@ -38,6 +38,9 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
                 ExerciseRepeat = ue.ExerciseRepeat,
                 ExerciseSet = ue.ExerciseSet,
                 ExerciseTotalBurnedKcal = ue.ExerciseTotalBurnedKcal,
+                AppUserId = ue.AppUserId,
+                Date = ue.Date,
+                DayNo = ue.DayNo,
                 ExerciseDetailDto = exerciseDetails.FirstOrDefault(ed => ed.ExerciseDetailId == ue.ExerciseDetailId)
             }).ToList();
 

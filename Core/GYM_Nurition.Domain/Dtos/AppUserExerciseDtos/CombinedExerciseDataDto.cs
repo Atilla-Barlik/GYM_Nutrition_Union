@@ -13,6 +13,9 @@ namespace GYM_Nurition.Domain.Dtos.AppUserExerciseDtos
         public int ExerciseRepeat { get; set; }
         public int ExerciseSet { get; set; }
         public int ExerciseTotalBurnedKcal { get; set; }
+        public int AppUserId { get; set; }
+        public int DayNo { get; set; }
+        public DateOnly Date { get; set; }
         public ExerciseDetailDto ExerciseDetailDto { get; set; }
     }
 }
