@@ -121,6 +121,8 @@ builder.Services.AddScoped<GetUserMostUsedNutrientsQueryHandler>();
 builder.Services.AddScoped<GetExerciseDetailsWithExerciseIdQueryHandler>();
 
 builder.Services.AddScoped<GetAppUserExerciseProgramDetailsQueryHandler>();
+
+builder.Services.AddScoped<DeleteAppUserExerciseProgramByDayNoCommandHandler>();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {

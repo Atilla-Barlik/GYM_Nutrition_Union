@@ -18,9 +18,10 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		private readonly GetAppUserExerciseProgramByIdQueryHandler _getAppUserExerciseProgramByIdQueryHandler;
 		private readonly GetAppUserExerciseProgramQueryHandler _getAppUserExerciseProgramQueryHandler;
 		private readonly GetAppUserExerciseProgramDetailsQueryHandler _getAppUserExerciseProgramDetailsQueryHandler;
+		private readonly DeleteAppUserExerciseProgramByDayNoCommandHandler _deleteAppUserExerciseProgramByDayNoCommdanHandler;
 
 
-		public AppUserExerciseProgramController(CreateAppUserExerciseProgramCommandHandler createAppUserExerciseProgramCommandHandler, UpdateAppUserExerciseProgramCommandHandler updateAppUserExerciseProgramCommandHandler, RemoveAppUserExerciseProgramCommandHandler removeAppUserExerciseProgramCommandHandler, GetAppUserExerciseProgramByIdQueryHandler getAppUserExerciseProgramByIdQueryHandler, GetAppUserExerciseProgramQueryHandler getAppUserExerciseProgramQueryHandler,GetAppUserExerciseProgramDetailsQueryHandler getAppUserExerciseProgramDetailsQueryHandler)
+		public AppUserExerciseProgramController(CreateAppUserExerciseProgramCommandHandler createAppUserExerciseProgramCommandHandler, UpdateAppUserExerciseProgramCommandHandler updateAppUserExerciseProgramCommandHandler, RemoveAppUserExerciseProgramCommandHandler removeAppUserExerciseProgramCommandHandler, GetAppUserExerciseProgramByIdQueryHandler getAppUserExerciseProgramByIdQueryHandler, GetAppUserExerciseProgramQueryHandler getAppUserExerciseProgramQueryHandler,GetAppUserExerciseProgramDetailsQueryHandler getAppUserExerciseProgramDetailsQueryHandler, DeleteAppUserExerciseProgramByDayNoCommandHandler deleteAppUserExerciseProgramByDayNoCommandHandler)
 		{
 			_createAppUserExerciseProgramCommandHandler = createAppUserExerciseProgramCommandHandler;
 			_updateAppUserExerciseProgramCommandHandler = updateAppUserExerciseProgramCommandHandler;
@@ -28,6 +29,7 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 			_getAppUserExerciseProgramByIdQueryHandler = getAppUserExerciseProgramByIdQueryHandler;
 			_getAppUserExerciseProgramQueryHandler = getAppUserExerciseProgramQueryHandler;
 			_getAppUserExerciseProgramDetailsQueryHandler = getAppUserExerciseProgramDetailsQueryHandler;
+			_deleteAppUserExerciseProgramByDayNoCommdanHandler = deleteAppUserExerciseProgramByDayNoCommandHandler;
 		}
 
 		[HttpGet]
@@ -69,5 +71,15 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
             var result = await _getAppUserExerciseProgramDetailsQueryHandler.Handle(query);
             return Ok(result);
         }
+
+
+        [HttpDelete("delete-by-dayno/{dayNo}")]
+        public async Task<IActionResult> DeleteByDayNo(int dayNo)
+		{
+			var command = new DeleteAppUserExerciseProgramByDayNoCommand(dayNo);
+			await _deleteAppUserExerciseProgramByDayNoCommdanHandler.Handle(command);
+
+			return NoContent();
+		}
     }
 }

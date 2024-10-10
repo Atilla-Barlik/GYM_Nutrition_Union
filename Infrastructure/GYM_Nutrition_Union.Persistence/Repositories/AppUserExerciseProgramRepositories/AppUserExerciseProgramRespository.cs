@@ -60,5 +60,13 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRep
                 })
                 .ToListAsync();
         }
+
+        public async Task DeleteByDayNoAsync(int dayNo)
+        {
+            var entriesToDelete = _context.AppUsersExerciseProgram
+                                      .Where(x => x.DayNo == dayNo);
+            _context.AppUsersExerciseProgram.RemoveRange(entriesToDelete);
+            await _context.SaveChangesAsync();
+        }
     }
 }

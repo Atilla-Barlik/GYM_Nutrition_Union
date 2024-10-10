@@ -13,5 +13,6 @@ namespace GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInter
     {
         Task<List<AppUserExerciseProgramDto>> GetUserExerciseProgramsAsync(int appUserId);
         Task<List<ExerciseDetailDto>> GetExerciseDetailsAsync(List<int> exerciseDetailIds);
+        Task DeleteByDayNoAsync(int dayNo);
     }
 }
