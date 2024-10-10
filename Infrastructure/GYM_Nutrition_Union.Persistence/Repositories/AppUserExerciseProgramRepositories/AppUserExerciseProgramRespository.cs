@@ -33,6 +33,7 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRep
                     DayNo = s.DayNo,
                     ExerciseRepeat = s.ExerciseRepeat,
                     ExerciseSet = s.ExerciseSet,
+                    ExerciseWeight = s.ExerciseWeight,
                     ExerciseTotalBurnedKcal = s.ExerciseTotalBurnedKcal
                 })
             .ToListAsync();

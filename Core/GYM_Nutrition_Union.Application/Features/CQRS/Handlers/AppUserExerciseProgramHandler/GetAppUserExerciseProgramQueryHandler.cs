@@ -23,7 +23,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
 				ExerciseDetailId = x.ExerciseDetailId,
 				ExerciseRepeat = x.ExerciseRepeat,
 				ExerciseSet = x.ExerciseSet,
-				ExerciseTotalBurnedKcal = x.ExerciseTotalBurnedKcal,
+                ExerciseWeight = x.ExerciseWeight,
+                ExerciseTotalBurnedKcal = x.ExerciseTotalBurnedKcal,
 				DayNo = x.DayNo,
 				Date = x.Date,
 			}).ToList();
