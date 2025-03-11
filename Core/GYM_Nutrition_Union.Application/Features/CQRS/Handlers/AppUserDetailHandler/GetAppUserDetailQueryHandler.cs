@@ -29,6 +29,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHa
 				AfterImage = x.AfterImage,
 				BeforeImage = x.BeforeImage,
 				sex = x.sex,
+				Age = x.Age,
 				Length = x.Length,
 				Weight = x.Weight,
 			}).ToList();

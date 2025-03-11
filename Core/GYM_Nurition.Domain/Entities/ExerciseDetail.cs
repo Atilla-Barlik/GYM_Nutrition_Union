@@ -20,7 +20,8 @@ namespace GYM_Nurition.Domain.Entities
 		public string Gif1 { get; set; }
 		public string Gif2 { get; set; }
 		public string Gif3 { get; set; }
-		public Exercise Exercise { get; set; }
+        public decimal BaseMET { get; set; }
+        public Exercise Exercise { get; set; }
         public int ExerciseId { get; set; }
 		public List<AppUserExerciseProgram> AppUserExerciseProgram { get; set; }
 

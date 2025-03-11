@@ -36,6 +36,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailH
 				Gif1 = x.Gif1,
 				Gif2 = x.Gif2,
 				Gif3 = x.Gif3,
+				BaseMET = x.BaseMET,
 				ExerciseId = x.ExerciseId
 			}).ToList();
 		}

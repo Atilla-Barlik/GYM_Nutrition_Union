@@ -24,7 +24,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyDeta
 			var values = await _repository.GetByIdAsync(command.AppUserBodyDetailId);
 			values.AppUserBodyDetailId = command.AppUserBodyDetailId;
 			values.AppUserId = command.AppUserId;
-			values.Date=command.Date;
+			values.Date = command.Date;
 			values.Chest = command.Chest;
 			values.Hips = command.Hips;
 			values.Shoulder = command.Shoulder;

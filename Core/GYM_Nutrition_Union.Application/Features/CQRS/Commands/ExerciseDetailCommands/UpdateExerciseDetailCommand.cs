@@ -20,6 +20,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Commands.ExerciseDetailC
 		public string Gif1 { get; set; }
 		public string Gif2 { get; set; }
 		public string Gif3 { get; set; }
-		public int ExerciseId { get; set; }
+        public decimal BaseMET { get; set; }
+        public int ExerciseId { get; set; }
 	}
 }

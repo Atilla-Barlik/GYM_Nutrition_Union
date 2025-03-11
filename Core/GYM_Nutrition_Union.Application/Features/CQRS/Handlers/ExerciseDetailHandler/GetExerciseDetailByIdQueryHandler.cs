@@ -38,6 +38,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailH
 				Gif1 = values.Gif1,
 				Gif2 = values.Gif2,
 				Gif3 = values.Gif3,
+				BaseMET = values.BaseMET,
 				ExerciseId = values.ExerciseId
 			};
 		}

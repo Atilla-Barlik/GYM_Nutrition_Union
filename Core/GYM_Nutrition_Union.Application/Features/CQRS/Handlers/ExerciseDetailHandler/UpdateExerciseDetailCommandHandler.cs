@@ -35,6 +35,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailH
 			values.Gif1 = command.Gif1;
 			values.Gif2 = command.Gif2;
 			values.Gif3 = command.Gif3;
+			values.BaseMET = command.BaseMET;
 			await _repository.UpdateAsync(values);
 		}
 	}

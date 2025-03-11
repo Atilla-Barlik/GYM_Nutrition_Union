@@ -28,6 +28,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientHandler
             {
                 Id = values.Id,
                 Name = values.Name,
+                image = values.image,
                 kcal = values.kcal,
                 carbonhydrate = values.carbonhydrate,
                 protein = values.protein,

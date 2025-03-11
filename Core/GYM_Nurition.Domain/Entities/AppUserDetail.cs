@@ -13,6 +13,7 @@ namespace GYM_Nurition.Domain.Entities
         public decimal Weight { get; set; }
         public string BeforeImage { get; set; }
         public string AfterImage { get; set; }
+        public int Age { get; set; }
         public bool sex { get; set; }
         public List<AppUserBodyMassIndex> BodyMassIndex { get; set; }
         public AppUser AppUser { get; set; }

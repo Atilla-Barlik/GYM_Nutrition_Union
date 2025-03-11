@@ -25,7 +25,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHa
 				AfterImage = values.AfterImage,
 				Length = values.Length,
 				Weight = values.Weight,
-				sex = values.sex
+				sex = values.sex,
+				Age = values.Age
 			};
 		}
 	}

@@ -13,19 +13,23 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientTotalsHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetNutrientTotalsQueries;
 using GYM_Nutrition_Union.Application.Interfaces;
+using GYM_Nutrition_Union.Application.Interfaces.AppUserDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyMealTimeInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseInterfaces;
+using GYM_Nutrition_Union.Application.Interfaces.NutrientInterfaces;
 using GYM_Nutrition_Union.Application.Services;
 using GYM_Nutrition_Union.Persistence.Context;
 using GYM_Nutrition_Union.Persistence.Repositories;
+using GYM_Nutrition_Union.Persistence.Repositories.AppUserDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMealTimeRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseRepositories;
+using GYM_Nutrition_Union.Persistence.Repositories.NutrientRepositories;
 using GYM_NutritionDetails_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
 using System.Text.Json.Serialization;
 
@@ -42,6 +46,8 @@ builder.Services.AddScoped(typeof(ITop10UsageNutritionRepository), typeof(Top10U
 builder.Services.AddScoped(typeof(IUserTop10UsageNutrientRepository), typeof(UserTop10UsageNutrientRepository));
 builder.Services.AddScoped(typeof(IExerciseRepository), typeof(ExerciseRepository));
 builder.Services.AddScoped(typeof(IAppUserExerciseProgramRespository), typeof(AppUserExerciseProgramRespository));
+builder.Services.AddScoped(typeof(INutrientRepository), typeof(NutrientRepository));
+builder.Services.AddScoped(typeof(IAppUserDetailRepository), typeof(AppUserDetailRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -123,6 +129,8 @@ builder.Services.AddScoped<GetExerciseDetailsWithExerciseIdQueryHandler>();
 builder.Services.AddScoped<GetAppUserExerciseProgramDetailsQueryHandler>();
 
 builder.Services.AddScoped<DeleteAppUserExerciseProgramByDayNoCommandHandler>();
+
+builder.Services.AddScoped<GetNutrientByNameQueryHandler>();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -130,6 +138,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

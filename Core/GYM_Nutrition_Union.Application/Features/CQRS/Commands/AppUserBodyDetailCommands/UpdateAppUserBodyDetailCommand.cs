@@ -9,7 +9,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserBodyDeta
 	public class UpdateAppUserBodyDetailCommand
 	{
 		public int AppUserBodyDetailId { get; set; }
-		public DateTime Date { get; set; }
+		public DateOnly Date { get; set; }
 		public int Chest { get; set; }
 		public int LeftArm { get; set; }
 		public int RightArm { get; set; }

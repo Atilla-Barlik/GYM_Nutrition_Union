@@ -4,6 +4,7 @@ using GYM_Nutrition_Union.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Nutrition_Union.Persistence.Migrations
 {
     [DbContext(typeof(GYM_Nutrition_Context))]
-    partial class GYM_Nutrition_ContextModelSnapshot : ModelSnapshot
+    [Migration("20241013055707_AppUserBodyDetailUpdate")]
+    partial class AppUserBodyDetailUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,9 +149,6 @@ namespace GYM_Nutrition_Union.Persistence.Migrations
                     b.Property<string>("AfterImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
 
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
@@ -349,9 +349,6 @@ namespace GYM_Nutrition_Union.Persistence.Migrations
 
                     b.Property<int>("AverageKcal")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("BaseMET")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description1")
                         .IsRequired()

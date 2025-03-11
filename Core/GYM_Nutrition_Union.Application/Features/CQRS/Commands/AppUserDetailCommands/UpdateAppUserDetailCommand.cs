@@ -14,6 +14,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserDetailCo
 		public string BeforeImage { get; set; }
 		public string AfterImage { get; set; }
 		public bool sex { get; set; }
-		public int AppUserId { get; set; }
+        public int Age { get; set; }
+        public int AppUserId { get; set; }
 	}
 }

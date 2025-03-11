@@ -6,6 +6,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetDailyNutritionQue
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetNutrientQueries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 
 namespace GYM_Nutrition_Union.WebApi.Controllers
 {
@@ -18,14 +19,17 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
         private readonly RemoveNutrientCommandHandler _removeCommendHandler;
         private readonly GetNutrientByIdQueryHandler _getNutrientByIdQueryHandler;
         private readonly GetNutrientQueryHandler _getNutrientQueryHandler;
+        private readonly GetNutrientByNameQueryHandler _getNutrientByNameQueryHandler;
 
-        public NutrientController(CreateNutrientCommandHandler commandHandler, UpdateNutrientCommandHandler? updateCommandHandler, RemoveNutrientCommandHandler removeCommendHandler, GetNutrientByIdQueryHandler getNutrientByIdQueryHandler, GetNutrientQueryHandler getNutrientQueryHandler)
+        public NutrientController(CreateNutrientCommandHandler commandHandler, UpdateNutrientCommandHandler? updateCommandHandler, RemoveNutrientCommandHandler removeCommendHandler, GetNutrientByIdQueryHandler getNutrientByIdQueryHandler, GetNutrientQueryHandler getNutrientQueryHandler, GetNutrientByNameQueryHandler getNutrientByNameQueryHandler)
         {
             _createCommandHandler = commandHandler;
             _updateCommandHandler = updateCommandHandler;
             _removeCommendHandler = removeCommendHandler;
             _getNutrientByIdQueryHandler = getNutrientByIdQueryHandler;
             _getNutrientQueryHandler = getNutrientQueryHandler;
+            _getNutrientByNameQueryHandler = getNutrientByNameQueryHandler;
+            
         }
 
         [HttpGet]
@@ -58,6 +62,15 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
         {
             await _updateCommandHandler.Handle(command);
             return Ok("Egzersiz Güncellendi.");
+        }
+        [HttpGet("GetNutrientDetailByName/{name}")]
+        public async Task<IActionResult> GetNutrientDetailByName(string name)
+        {
+            var result = await _getNutrientByNameQueryHandler.Handle(new GetNutrientByNameQuery(name));
+            if (result == null)
+                return NotFound("Besin bulunamadı!");
+
+            return Ok(result);
         }
     }
 }

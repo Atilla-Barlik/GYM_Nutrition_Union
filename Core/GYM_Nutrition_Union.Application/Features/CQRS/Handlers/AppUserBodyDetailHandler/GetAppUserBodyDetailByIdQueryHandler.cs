@@ -2,6 +2,7 @@
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.AppUserBodyDetailQueries;
 using GYM_Nutrition_Union.Application.Features.CQRS.Results.AppUserBodyDetailResults;
 using GYM_Nutrition_Union.Application.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyDetailHandler
 {
@@ -16,7 +17,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyDeta
 
 		public async Task<GetAppUserBodyDetailByIdQueryResult> Handle(GetAppUserBodyDetailByIdQuery query)
 		{
-			var values = await _repository.GetByIdAsync(query.Id);
+            var values = await _repository.GetByIdAsync(query.Id);
 			return new GetAppUserBodyDetailByIdQueryResult
 			{
 				AppUserBodyDetailId = values.AppUserBodyDetailId,

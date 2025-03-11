@@ -10,5 +10,6 @@ namespace GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces
 	public interface IExerciseDetailRepository
 	{
 		List<ExerciseDetail> GetExerciseDetailListWithExerciseNames();
-	}
+        Task<ExerciseDetail> GetById(int exerciseDetailId);
+    }
 }

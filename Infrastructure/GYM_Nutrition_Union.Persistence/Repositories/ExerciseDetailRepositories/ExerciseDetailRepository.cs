@@ -20,7 +20,12 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositorie
 			_context = context;
 		}
 
-		public  List<ExerciseDetail> GetExerciseDetailListWithExerciseNames()
+        public async Task<ExerciseDetail> GetById(int exerciseDetailId)
+        {
+            return await _context.ExerciseDetails.FirstOrDefaultAsync(e => e.ExerciseDetailId == exerciseDetailId);
+        }
+
+        public  List<ExerciseDetail> GetExerciseDetailListWithExerciseNames()
 		{
 			var values = _context.ExerciseDetails.Include(x=>x.Exercise).ToList(); //iki tabloyu birleştirdik
 			return values;

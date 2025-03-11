@@ -34,7 +34,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.ExerciseDetailH
 				Equipment = command.Equipment,
 				Gif1 = command.Gif1,
 				Gif2 = command.Gif2,
-				Gif3 = command.Gif3
+				Gif3 = command.Gif3,
+				BaseMET = command.BaseMET
 			});
 		}
 	}

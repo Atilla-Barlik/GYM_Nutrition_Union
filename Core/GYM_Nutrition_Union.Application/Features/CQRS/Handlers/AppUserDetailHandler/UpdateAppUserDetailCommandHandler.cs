@@ -26,6 +26,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHa
 			values.AppUserId = command.AppUserId;
 			values.BeforeImage =values.BeforeImage;
 			values.AfterImage =values.AfterImage;
+			values.Age = values.Age;
 			values.sex = values.sex;
 			values.Length = values.Length;
 			values.Weight = values.Weight;
