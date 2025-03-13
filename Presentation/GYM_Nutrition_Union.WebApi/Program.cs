@@ -25,6 +25,7 @@ using GYM_Nutrition_Union.Persistence.Context;
 using GYM_Nutrition_Union.Persistence.Repositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRepositories;
+using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseStatisticsRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMealTimeRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
@@ -48,6 +49,7 @@ builder.Services.AddScoped(typeof(IExerciseRepository), typeof(ExerciseRepositor
 builder.Services.AddScoped(typeof(IAppUserExerciseProgramRespository), typeof(AppUserExerciseProgramRespository));
 builder.Services.AddScoped(typeof(INutrientRepository), typeof(NutrientRepository));
 builder.Services.AddScoped(typeof(IAppUserDetailRepository), typeof(AppUserDetailRepository));
+builder.Services.AddScoped(typeof(IAppUserExerciseStatisticsRepository), typeof(AppUserExerciseStatisticsRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -131,6 +133,9 @@ builder.Services.AddScoped<GetAppUserExerciseProgramDetailsQueryHandler>();
 builder.Services.AddScoped<DeleteAppUserExerciseProgramByDayNoCommandHandler>();
 
 builder.Services.AddScoped<GetNutrientByNameQueryHandler>();
+
+builder.Services.AddScoped<GetUserExerciseStatisticsQueryHandler>();
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
