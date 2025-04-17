@@ -10,6 +10,6 @@ namespace GYM_Nutrition_Union.Application.Interfaces.DailyMealTimeInterfaces
 {
     public interface IDailyMealTotalsRespository
     {
-        Task<List<NutritionSummaryDto>> GetNutritionSummary(int dailyNutritionId);
+        Task<List<NutritionSummaryDto>> GetNutritionSummary(int appUserId);
     }
 }

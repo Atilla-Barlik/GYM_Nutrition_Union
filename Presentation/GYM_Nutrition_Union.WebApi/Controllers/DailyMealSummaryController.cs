@@ -16,14 +16,14 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
             _dailyMealTotalsRespository = dailyMealTotalsRespository;
         }
 
-        [HttpGet("summary/{dailyNutritionId}")]
-        public async Task<ActionResult<NutritionSummaryDto>> GetNutritionSummary(int dailyNutritionId)
+        [HttpGet("summary/user/{appUserId}")]
+        public async Task<ActionResult<List<NutritionSummaryDto>>> GetNutritionSummary(int appUserId)
         {
-            var summary = await _dailyMealTotalsRespository.GetNutritionSummary(dailyNutritionId);
+            var summary = await _dailyMealTotalsRespository.GetNutritionSummary(appUserId);
 
-            if (summary == null)
+            if (summary == null || !summary.Any())
             {
-                return NotFound();
+                return NotFound("Bugüne ait beslenme kaydı bulunamadı.");
             }
 
             return Ok(summary);

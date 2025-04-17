@@ -11,12 +11,12 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetNutrientTotal
 {
     public class GetNutrientTotalsQuery 
     {
-        public int DailyNutritionId { get; set; }
+        public int appUserId { get; set; }
 
 
-        public GetNutrientTotalsQuery(int dailyNutritionId) 
+        public GetNutrientTotalsQuery(int AppUserId) 
         {
-            DailyNutritionId = dailyNutritionId;
+            AppUserId = appUserId;
         }
     }
 }

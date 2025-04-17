@@ -15,10 +15,10 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
             _queryHandler = queryHandler;
         }
 
-        [HttpGet("{userId}/{date}")]
-        public async Task<IActionResult> GetDailyNutrition(int userId, DateOnly date)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetDailyNutrition(int userId)
         {
-            var dailyNutrition = await _queryHandler.Handle(userId, date);
+            var dailyNutrition = await _queryHandler.Handle(userId);
 
             if (dailyNutrition == null)
             {

@@ -23,9 +23,9 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionH
             _dailyNutritionRepository = dailyNutritionRepository;
         }
 
-        public async Task<DailyNutrition> Handle(int userId, DateOnly date)
+        public async Task<DailyNutrition> Handle(int userId)
         {
-            return await _dailyNutritionRepository.GetDailyNutritionByUserIdAndDateAsync(userId, date);
+            return await _dailyNutritionRepository.GetDailyNutritionByUserIdAndDateAsync(userId);
         }
     }
 }

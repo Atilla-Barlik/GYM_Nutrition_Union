@@ -22,7 +22,8 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.NutrientTotalsH
 
         public async Task<List<NutritionSummaryDto>> Handle(GetNutrientTotalsQuery request, CancellationToken cancellationToken)
         {
-            var summary = await _dailyMealTotalsRespository.GetNutritionSummary(request.DailyNutritionId);
+            // Artık sadece AppUserId üzerinden çalışıyoruz
+            var summary = await _dailyMealTotalsRespository.GetNutritionSummary(request.appUserId);
 
             return summary;
         }

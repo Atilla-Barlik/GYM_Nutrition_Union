@@ -20,20 +20,33 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.DailyMealTimeRepositories
             _context = context;
         }
 
-        public async Task<List<NutritionSummaryDto>> GetNutritionSummary(int dailyNutritionId)
+        public async Task<List<NutritionSummaryDto>> GetNutritionSummary(int appUserId)
         {
+            // Bugünün tarihini al (DateOnly ile çalıştığını varsayıyoruz)
+            var today = DateOnly.FromDateTime(DateTime.Today);
+
+            // AppUserId + bugünün tarihine ait DailyNutrition kaydını bul
+            var dailyNutrition = await _context.DailyNutrition
+                .Where(dn => dn.AppUserId == appUserId && dn.Date == today)
+                .FirstOrDefaultAsync();
+
+            // Eğer bugüne ait kayıt yoksa boş liste dön
+            if (dailyNutrition == null)
+                return new List<NutritionSummaryDto>();
+
+            // DailyNutritionDetails üzerinden ilgili kayda ait değerleri grupla
             return await _context.DailyNutritionDetails
-             .Where(d => d.DailyNutritionId == dailyNutritionId)
-             .GroupBy(d => d.DailyMealTime)
-             .Select(g => new NutritionSummaryDto
-             {
-                 DailyMealTime = g.Key,
-                 TotalKcal = g.Sum(x => x.NutrientKcal),
-                 TotalCarbohydrate = g.Sum(x => x.NutrientCarbohydrate),
-                 TotalProtein = g.Sum(x => x.NutrientProtein),
-                 TotalFat = g.Sum(x => x.NutrientFat)
-             })
-             .ToListAsync();
+                .Where(d => d.DailyNutritionId == dailyNutrition.DailyNutritionID)
+                .GroupBy(d => d.DailyMealTime)
+                .Select(g => new NutritionSummaryDto
+                {
+                    DailyMealTime = g.Key,
+                    TotalKcal = g.Sum(x => x.NutrientKcal),
+                    TotalCarbohydrate = g.Sum(x => x.NutrientCarbohydrate),
+                    TotalProtein = g.Sum(x => x.NutrientProtein),
+                    TotalFat = g.Sum(x => x.NutrientFat)
+                })
+                .ToListAsync();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace GYM_Nutrition_Union.Application.Interfaces.DailyNutritionInterfaces
 {
     public interface IDailyNutritionRepository
     {
-        Task<DailyNutrition> GetDailyNutritionByUserIdAndDateAsync(int userId, DateOnly date);
+        Task<DailyNutrition> GetDailyNutritionByUserIdAndDateAsync(int userId);
         Task AddDailyNutritionAsync(DailyNutrition dailyNutrition);
     }
 }
