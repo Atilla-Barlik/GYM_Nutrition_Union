@@ -25,7 +25,6 @@ namespace GYM_Nutrition_Union.Persistence.Context
 		public DbSet<DailyNutrition> DailyNutrition { get; set; }
 		public DbSet<DailyNutritionDetails> DailyNutritionDetails { get; set; }	
 		public DbSet<Nutrient> Nutrient { get; set; }
-		
-
+		public DbSet<DailyMacro> DailyMacro { get; set; }
 	}
 }

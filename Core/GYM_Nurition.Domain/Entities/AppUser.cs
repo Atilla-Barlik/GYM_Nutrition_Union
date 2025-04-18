@@ -18,5 +18,6 @@ namespace GYM_Nurition.Domain.Entities
         public List<AppUserTrainingTime> appUserTrainingTime { get; set;}
         public List<AppUserBodyDetail> appUserBodyDetail { get; set;}
         public List<DailyNutrition> dailyNutritions { get; set; }
+        public List<DailyMacro> dailyMacros { get; set; }
 	}
 }
