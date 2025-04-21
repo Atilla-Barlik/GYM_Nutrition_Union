@@ -1,9 +1,12 @@
 ﻿using GYM_Nutrition_Union.Application.Features.CQRS.Commands.DailyNutritionDetailCommands;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.DailyNutritionDetailQueries;
+using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionDetailInterfaces;
+using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionDetailRepositories;
 using GYM_NutritionDetails_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 
 namespace GYM_Nutrition_Union.WebApi.Controllers
 {
@@ -16,14 +19,17 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		private readonly RemoveDailyNutritionDetailCommandHandler _removeDailyNutritionDetailCommandHandler;
 		private readonly GetDailyNutritionDetailByIdQueryHandler _getDailyNutritionDetailByIdQueryHandler;
 		private readonly GetDailyNutritionDetailQueryHandler _getDailyNutritionDetailQueryHandler;
+		private readonly GetLatestNutritionDetailsByUserIdQueryHandler _getLatestNutritionDetailsByUserIdQueryHandler;
 
-		public DailyNutritionDetailsController(CreateDailyNutritionDetailCommandHandler createDailyNutritionDetailCommandHandler, UpdateDailyNutritionDetailCommandHandler updateDailyNutritionDetailCommandHandler, RemoveDailyNutritionDetailCommandHandler removeDailyNutritionDetailCommandHandler, GetDailyNutritionDetailByIdQueryHandler getDailyNutritionDetailByIdQueryHandler, GetDailyNutritionDetailQueryHandler getDailyNutritionDetailQueryHandler)
+		public DailyNutritionDetailsController(CreateDailyNutritionDetailCommandHandler createDailyNutritionDetailCommandHandler, UpdateDailyNutritionDetailCommandHandler updateDailyNutritionDetailCommandHandler, RemoveDailyNutritionDetailCommandHandler removeDailyNutritionDetailCommandHandler, GetDailyNutritionDetailByIdQueryHandler getDailyNutritionDetailByIdQueryHandler, GetDailyNutritionDetailQueryHandler getDailyNutritionDetailQueryHandler,
+            GetLatestNutritionDetailsByUserIdQueryHandler getLatestNutritionDetailsByUserIdQueryHandler)
 		{
 			_createDailyNutritionDetailCommandHandler = createDailyNutritionDetailCommandHandler;
 			_updateDailyNutritionDetailCommandHandler = updateDailyNutritionDetailCommandHandler;
 			_removeDailyNutritionDetailCommandHandler = removeDailyNutritionDetailCommandHandler;
 			_getDailyNutritionDetailByIdQueryHandler = getDailyNutritionDetailByIdQueryHandler;
 			_getDailyNutritionDetailQueryHandler = getDailyNutritionDetailQueryHandler;
+			_getLatestNutritionDetailsByUserIdQueryHandler = getLatestNutritionDetailsByUserIdQueryHandler;
 		}
 
 		[HttpGet]
@@ -57,5 +63,16 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 			await _updateDailyNutritionDetailCommandHandler.Handle(command);
 			return Ok("DailyNutritionDetail Güncellendi.");
 		}
-	}
+
+        [HttpGet("latest-nutrition-details/{appUserId}")]
+        public async Task<IActionResult> GetLatestNutritionDetails(int appUserId)
+        {
+            var result = await _getLatestNutritionDetailsByUserIdQueryHandler.Handle(new GetLatestNutritionDetailsByUserIdQuery(appUserId));
+
+            if (result == null || !result.Any())
+                return NotFound();
+
+            return Ok(result);
+        }
+    }
 }

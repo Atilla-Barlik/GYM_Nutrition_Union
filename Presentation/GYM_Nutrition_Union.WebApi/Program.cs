@@ -17,6 +17,7 @@ using GYM_Nutrition_Union.Application.Interfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyMealTimeInterfaces;
+using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseInterfaces;
@@ -28,6 +29,7 @@ using GYM_Nutrition_Union.Persistence.Repositories.AppUserDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseStatisticsRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMealTimeRepositories;
+using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseRepositories;
@@ -51,6 +53,7 @@ builder.Services.AddScoped(typeof(IAppUserExerciseProgramRespository), typeof(Ap
 builder.Services.AddScoped(typeof(INutrientRepository), typeof(NutrientRepository));
 builder.Services.AddScoped(typeof(IAppUserDetailRepository), typeof(AppUserDetailRepository));
 builder.Services.AddScoped(typeof(IAppUserExerciseStatisticsRepository), typeof(AppUserExerciseStatisticsRepository));
+builder.Services.AddScoped(typeof(IDailyNutritionDetailGetByUserIdRepository), typeof(DailyNutritionDetailGetByUserIdRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -112,6 +115,7 @@ builder.Services.AddScoped<GetDailyNutritionDetailQueryHandler>();
 builder.Services.AddScoped<RemoveDailyNutritionDetailCommandHandler>();
 builder.Services.AddScoped<UpdateDailyNutritionDetailCommandHandler>();
 builder.Services.AddScoped<CreateDailyNutritionDetailCommandHandler>();
+builder.Services.AddScoped<GetLatestNutritionDetailsByUserIdQueryHandler>();
 
 builder.Services.AddScoped<GetNutrientByIdQueryHandler>();
 builder.Services.AddScoped<GetNutrientQueryHandler>();
