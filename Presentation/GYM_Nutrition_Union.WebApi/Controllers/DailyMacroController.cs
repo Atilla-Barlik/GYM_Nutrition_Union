@@ -7,6 +7,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Queries.DailyNutritionDetail
 using GYM_NutritionDetails_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 
 namespace GYM_Nutrition_Union.WebApi.Controllers
 {
@@ -19,14 +20,17 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
         private readonly RemoveDailyMacroCommandHandler _removeDailyMacroCommandHandler;
         private readonly GetDailyMacroByIdQueryHandler _getDailyMacroByIdQueryHandler;
         private readonly GetDailyMacroQueryHandler _getDailyMacroQueryHandler;
+        private readonly GetLatestDailyMacroByUserIdQueryHandler _getLatestDailyMacroByUserIdQueryHandler;
 
-        public DailyMacroController(CreateDailyMacroCommandHandler createDailyMacroCommandHandler, UpdateDailyMacroCommandHandler updateDailyMacroCommandHandler, RemoveDailyMacroCommandHandler removeDailyMacroCommandHandler, GetDailyMacroByIdQueryHandler getDailyMacroByIdQueryHandler, GetDailyMacroQueryHandler getDailyMacroQueryHandler)
+        public DailyMacroController(CreateDailyMacroCommandHandler createDailyMacroCommandHandler, UpdateDailyMacroCommandHandler updateDailyMacroCommandHandler, RemoveDailyMacroCommandHandler removeDailyMacroCommandHandler, GetDailyMacroByIdQueryHandler getDailyMacroByIdQueryHandler, GetDailyMacroQueryHandler getDailyMacroQueryHandler,
+            GetLatestDailyMacroByUserIdQueryHandler getLatestDailyMacroByUserIdQueryHandler)
         {
             _createDailyMacroCommandHandler = createDailyMacroCommandHandler;
             _updateDailyMacroCommandHandler = updateDailyMacroCommandHandler;
             _removeDailyMacroCommandHandler = removeDailyMacroCommandHandler;
             _getDailyMacroByIdQueryHandler = getDailyMacroByIdQueryHandler;
             _getDailyMacroQueryHandler = getDailyMacroQueryHandler;
+            _getLatestDailyMacroByUserIdQueryHandler = getLatestDailyMacroByUserIdQueryHandler;
         }
 
         [HttpGet]
@@ -59,6 +63,17 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
         {
             await _updateDailyMacroCommandHandler.Handle(command);
             return Ok("DailyMacro  Güncellendi.");
+        }
+
+        [HttpGet("latest/{appUserId}")]
+        public async Task<IActionResult> GetLatestMacro(int appUserId)
+        {
+            var result = await _getLatestDailyMacroByUserIdQueryHandler.Handle(new GetLatestDailyMacroByUserIdQuery(appUserId));
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
         }
     }
 }
