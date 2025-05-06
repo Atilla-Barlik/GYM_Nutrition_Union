@@ -24,12 +24,12 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHa
 			var values = await _repository.GetByIdAsync(command.AppUserDetailId);
 			values.AppUserDetailId = command.AppUserDetailId;
 			values.AppUserId = command.AppUserId;
-			values.BeforeImage =values.BeforeImage;
-			values.AfterImage =values.AfterImage;
-			values.Age = values.Age;
-			values.sex = values.sex;
-			values.Length = values.Length;
-			values.Weight = values.Weight;
+			values.BeforeImage =command.BeforeImage;
+			values.AfterImage =command.AfterImage;
+			values.Age = command.Age;
+			values.sex = command.sex;
+			values.Length = command.Length;
+			values.Weight = command.Weight;
 			await _repository.UpdateAsync(values);
 		}
 	}

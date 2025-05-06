@@ -1,6 +1,7 @@
 ﻿using GYM_Nurition.Domain.Dtos.AppUserExerciseDtos;
 using GYM_Nurition.Domain.Entities;
 using GYM_Nurition.Domain.ModelViews;
+using GYM_Nutrition_Union.Application.Features.CQRS.Results.AppUserExerciseProgramResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInter
         Task<List<AppUserExerciseProgramDto>> GetUserExerciseProgramsAsync(int appUserId);
         Task<List<ExerciseDetailDto>> GetExerciseDetailsAsync(List<int> exerciseDetailIds);
         Task DeleteByDayNoAsync(int dayNo);
+        Task<List<GetAppUserExerciseProgramTotalBurnKcalQueryResult>> GetDailyBurnSummaryAsync(int appUserId);
     }
 }

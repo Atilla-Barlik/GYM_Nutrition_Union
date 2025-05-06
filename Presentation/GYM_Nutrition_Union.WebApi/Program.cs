@@ -57,6 +57,7 @@ builder.Services.AddScoped(typeof(IAppUserDetailRepository), typeof(AppUserDetai
 builder.Services.AddScoped(typeof(IAppUserExerciseStatisticsRepository), typeof(AppUserExerciseStatisticsRepository));
 builder.Services.AddScoped(typeof(IDailyNutritionDetailGetByUserIdRepository), typeof(DailyNutritionDetailGetByUserIdRepository));
 builder.Services.AddScoped(typeof(IDailyMacroRepository), typeof(DailyMacroRepository));
+builder.Services.AddScoped(typeof(IDailyNutritionTotalsRepository), typeof(DailyNutritionTotalsRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -70,6 +71,7 @@ builder.Services.AddScoped<RemoveExerciseDetailCommandHandler>();
 builder.Services.AddScoped<UpdateExerciseDetailCommandHandler>();
 builder.Services.AddScoped<CreateExerciseDetailCommandHandler>();
 builder.Services.AddScoped<GetExerciseDetailWithExerciseNameQueryHandler>();
+builder.Services.AddScoped<GetAppUserExerciseProgramTotalBurnKcalByUserIdQueryHandler>();
 
 builder.Services.AddScoped<GetAppUserByIdQueryHandler>();
 builder.Services.AddScoped<GetAppUserQueryHandler>();
@@ -112,6 +114,7 @@ builder.Services.AddScoped<GetDailyNutritionQueryHandler>();
 builder.Services.AddScoped<RemoveDailyNutritionCommandHandler>();
 builder.Services.AddScoped<UpdateDailyNutritionCommandHandler>();
 builder.Services.AddScoped<CreateDailyNutritionCommandHandler>();
+builder.Services.AddScoped<CloseDailyNutritionCommandHandler>();
 
 builder.Services.AddScoped<GetDailyNutritionDetailByIdQueryHandler>();
 builder.Services.AddScoped<GetDailyNutritionDetailQueryHandler>();

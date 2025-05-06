@@ -1,6 +1,7 @@
 ﻿using GYM_Nurition.Domain.Dtos.AppUserExerciseDtos;
 using GYM_Nurition.Domain.Entities;
 using GYM_Nurition.Domain.ModelViews;
+using GYM_Nutrition_Union.Application.Features.CQRS.Results.AppUserExerciseProgramResults;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInterfaces;
 using GYM_Nutrition_Union.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +68,20 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRep
                                       .Where(x => x.DayNo == dayNo);
             _context.AppUsersExerciseProgram.RemoveRange(entriesToDelete);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<GetAppUserExerciseProgramTotalBurnKcalQueryResult>> GetDailyBurnSummaryAsync(int appUserId)
+        {
+            return await _context.AppUsersExerciseProgram
+               .Where(x => x.AppUserId == appUserId)
+               .GroupBy(x => x.DayNo)
+               .Select(g => new GetAppUserExerciseProgramTotalBurnKcalQueryResult
+               {
+                   DayNo = g.Key,
+                   TotalBurnedKcal = g.Sum(x => x.ExerciseTotalBurnedKcal)
+               })
+               .OrderBy(x => x.DayNo)
+               .ToListAsync();
         }
     }
 }

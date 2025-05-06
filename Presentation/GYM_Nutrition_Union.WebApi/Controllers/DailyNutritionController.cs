@@ -2,6 +2,7 @@
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetDailyNutritionQueries;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 
 namespace GYM_Nutrition_Union.WebApi.Controllers
 {
@@ -14,15 +15,17 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		private readonly RemoveDailyNutritionCommandHandler _removeDailyNutritionCommandHandler;
 		private readonly GetDailyNutrientByIdQueryHandler _getDailyNutritionByIdQueryHandler;
 		private readonly GetDailyNutritionQueryHandler _getDailyNutritionQueryHandler;
-		
+		private readonly CloseDailyNutritionCommandHandler _closeDailyNutritionCommandHandler;
 
-		public DailyNutritionController(CreateDailyNutritionCommandHandler createDailyNutritionCommandHandler, UpdateDailyNutritionCommandHandler updateDailyNutritionCommandHandler, RemoveDailyNutritionCommandHandler removeDailyNutritionCommandHandler, GetDailyNutrientByIdQueryHandler getDailyNutritionByIdQueryHandler, GetDailyNutritionQueryHandler getDailyNutritionQueryHandler)
+        public DailyNutritionController(CreateDailyNutritionCommandHandler createDailyNutritionCommandHandler, UpdateDailyNutritionCommandHandler updateDailyNutritionCommandHandler, RemoveDailyNutritionCommandHandler removeDailyNutritionCommandHandler, GetDailyNutrientByIdQueryHandler getDailyNutritionByIdQueryHandler, GetDailyNutritionQueryHandler getDailyNutritionQueryHandler,
+            CloseDailyNutritionCommandHandler closeDailyNutritionCommandHandler)
 		{
 			_createDailyNutritionCommandHandler = createDailyNutritionCommandHandler;
 			_updateDailyNutritionCommandHandler = updateDailyNutritionCommandHandler;
 			_removeDailyNutritionCommandHandler = removeDailyNutritionCommandHandler;
 			_getDailyNutritionByIdQueryHandler = getDailyNutritionByIdQueryHandler;
 			_getDailyNutritionQueryHandler = getDailyNutritionQueryHandler;
+			_closeDailyNutritionCommandHandler = closeDailyNutritionCommandHandler;
 			
 		}
 
@@ -57,6 +60,18 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 			await _updateDailyNutritionCommandHandler.Handle(command);
 			return Ok("Besin Güncellendi.");
 		}
-		
-	}
+        [HttpPost("close/{dailyNutritionId}")]
+        public async Task<IActionResult> Close(int dailyNutritionId)
+        {
+            try
+            {
+                await _closeDailyNutritionCommandHandler.Handle(new CloseDailyNutritionCommand(dailyNutritionId));
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+    }
 }
