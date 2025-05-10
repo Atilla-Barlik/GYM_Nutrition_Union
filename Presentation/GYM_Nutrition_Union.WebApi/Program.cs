@@ -1,3 +1,4 @@
+using GYM_Nurition.Domain.Entities;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserBodyMassIndexHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHandler;
@@ -16,12 +17,14 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Queries.GetNutrientTotalsQue
 using GYM_Nutrition_Union.Application.Interfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInterfaces;
+using GYM_Nutrition_Union.Application.Interfaces.AppUserInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyMacroInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyMealTimeInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.ExerciseInterfaces;
+using GYM_Nutrition_Union.Application.Interfaces.JWTokenInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.NutrientInterfaces;
 using GYM_Nutrition_Union.Application.Services;
 using GYM_Nutrition_Union.Persistence.Context;
@@ -29,14 +32,20 @@ using GYM_Nutrition_Union.Persistence.Repositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseStatisticsRepositories;
+using GYM_Nutrition_Union.Persistence.Repositories.AppUserRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMacroRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMealTimeRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.ExerciseRepositories;
+using GYM_Nutrition_Union.Persistence.Repositories.JWTokenRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.NutrientRepositories;
 using GYM_NutritionDetails_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +67,8 @@ builder.Services.AddScoped(typeof(IAppUserExerciseStatisticsRepository), typeof(
 builder.Services.AddScoped(typeof(IDailyNutritionDetailGetByUserIdRepository), typeof(DailyNutritionDetailGetByUserIdRepository));
 builder.Services.AddScoped(typeof(IDailyMacroRepository), typeof(DailyMacroRepository));
 builder.Services.AddScoped(typeof(IDailyNutritionTotalsRepository), typeof(DailyNutritionTotalsRepository));
+builder.Services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
+builder.Services.AddScoped(typeof(IAppUserRepository), typeof(AppUserRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -154,6 +165,8 @@ builder.Services.AddScoped<GetNutrientByNameQueryHandler>();
 
 builder.Services.AddScoped<GetUserExerciseStatisticsQueryHandler>();
 
+builder.Services.AddScoped<AuthenticateUserQueryHandler>();
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -161,7 +174,31 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
+builder.Services.AddScoped<IJwtTokenInterface, JwtTokenInterface>();
+var jwtKey = builder.Configuration["Jwt:Key"];
+var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+var jwtAudience = builder.Configuration["Jwt:Audience"];
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
 
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(jwtKey!)
+        )
+    };
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
