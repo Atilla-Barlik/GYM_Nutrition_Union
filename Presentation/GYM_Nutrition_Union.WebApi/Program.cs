@@ -69,6 +69,7 @@ builder.Services.AddScoped(typeof(IDailyMacroRepository), typeof(DailyMacroRepos
 builder.Services.AddScoped(typeof(IDailyNutritionTotalsRepository), typeof(DailyNutritionTotalsRepository));
 builder.Services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
 builder.Services.AddScoped(typeof(IAppUserRepository), typeof(AppUserRepository));
+builder.Services.AddScoped(typeof(IDailyNutritionGetClosedByUserRepository), typeof(DailyNutritionGetClosedByUserRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -126,6 +127,7 @@ builder.Services.AddScoped<RemoveDailyNutritionCommandHandler>();
 builder.Services.AddScoped<UpdateDailyNutritionCommandHandler>();
 builder.Services.AddScoped<CreateDailyNutritionCommandHandler>();
 builder.Services.AddScoped<CloseDailyNutritionCommandHandler>();
+builder.Services.AddScoped<GetClosedDailyNutritionByUserQueryHandler>();
 
 builder.Services.AddScoped<GetDailyNutritionDetailByIdQueryHandler>();
 builder.Services.AddScoped<GetDailyNutritionDetailQueryHandler>();
