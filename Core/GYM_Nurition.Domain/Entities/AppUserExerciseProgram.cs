@@ -12,6 +12,7 @@ namespace GYM_Nurition.Domain.Entities
         public int ExerciseRepeat { get; set; }
         public int ExerciseSet { get; set; }
         public decimal ExerciseWeight { get; set; }
+        public bool ExerciseDone { get; set; } = false;
         public int ExerciseTotalBurnedKcal { get; set; }
         public ExerciseDetail exerciseDetail { get; set; }
         public int ExerciseDetailId { get; set; }

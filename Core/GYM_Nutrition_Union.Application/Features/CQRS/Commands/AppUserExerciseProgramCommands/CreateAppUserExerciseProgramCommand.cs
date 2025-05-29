@@ -12,6 +12,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserExercise
 		public int ExerciseSet { get; set; }
         public decimal ExerciseWeight { get; set; }
         public int ExerciseTotalBurnedKcal { get; set; }
+		public bool ExerciseDone { get; set; } = false;
 		public int ExerciseDetailId { get; set; }
 		public int AppUserId { get; set; }
 		public int DayNo { get; set; }

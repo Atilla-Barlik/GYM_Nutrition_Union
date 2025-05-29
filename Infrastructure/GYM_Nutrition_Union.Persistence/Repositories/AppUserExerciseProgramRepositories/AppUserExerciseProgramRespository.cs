@@ -35,6 +35,7 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRep
                     ExerciseRepeat = s.ExerciseRepeat,
                     ExerciseSet = s.ExerciseSet,
                     ExerciseWeight = s.ExerciseWeight,
+                    ExerciseDone = s.ExerciseDone,
                     ExerciseTotalBurnedKcal = s.ExerciseTotalBurnedKcal
                 })
             .ToListAsync();
@@ -73,7 +74,7 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRep
         public async Task<List<GetAppUserExerciseProgramTotalBurnKcalQueryResult>> GetDailyBurnSummaryAsync(int appUserId)
         {
             return await _context.AppUsersExerciseProgram
-               .Where(x => x.AppUserId == appUserId)
+               .Where(x => x.AppUserId == appUserId).Where(x=>x.ExerciseDone == true)
                .GroupBy(x => x.DayNo)
                .Select(g => new GetAppUserExerciseProgramTotalBurnKcalQueryResult
                {

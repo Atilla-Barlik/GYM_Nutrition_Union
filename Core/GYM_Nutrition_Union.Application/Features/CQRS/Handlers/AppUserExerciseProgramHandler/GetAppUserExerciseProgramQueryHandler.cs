@@ -24,6 +24,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
 				ExerciseRepeat = x.ExerciseRepeat,
 				ExerciseSet = x.ExerciseSet,
                 ExerciseWeight = x.ExerciseWeight,
+				ExerciseDone = x.ExerciseDone,
                 ExerciseTotalBurnedKcal = x.ExerciseTotalBurnedKcal,
 				DayNo = x.DayNo,
 				Date = x.Date,

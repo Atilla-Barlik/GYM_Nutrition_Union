@@ -13,6 +13,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Results.AppUserExerciseP
 		public int ExerciseRepeat { get; set; }
 		public int ExerciseSet { get; set; }
         public decimal ExerciseWeight { get; set; }
+		public bool ExerciseDone { get; set; }
         public int ExerciseTotalBurnedKcal { get; set; }
 		public int ExerciseDetailId { get; set; }
 		public int AppUserId { get; set; }
