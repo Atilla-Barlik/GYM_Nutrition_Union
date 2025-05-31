@@ -26,5 +26,6 @@ namespace GYM_Nutrition_Union.Persistence.Context
 		public DbSet<DailyNutritionDetails> DailyNutritionDetails { get; set; }	
 		public DbSet<Nutrient> Nutrient { get; set; }
 		public DbSet<DailyMacro> DailyMacro { get; set; }
+		public DbSet<AvgKcalDailyResults> AvgKcalDailyResults { get; set; }
 	}
 }

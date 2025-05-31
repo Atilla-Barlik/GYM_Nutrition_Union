@@ -6,6 +6,7 @@ using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProg
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExerciseProgramHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserTrainingTimeHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AvgKcalDailyHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyMacroHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionDetailHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyNutritionHandler;
@@ -18,6 +19,7 @@ using GYM_Nutrition_Union.Application.Interfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserDetailInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserExerciseProgramInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.AppUserInterfaces;
+using GYM_Nutrition_Union.Application.Interfaces.AvgKcalDailyInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyMacroInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyMealTimeInterfaces;
 using GYM_Nutrition_Union.Application.Interfaces.DailyNutritionDetailInterfaces;
@@ -33,6 +35,7 @@ using GYM_Nutrition_Union.Persistence.Repositories.AppUserDetailRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseProgramRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserExerciseStatisticsRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.AppUserRepositories;
+using GYM_Nutrition_Union.Persistence.Repositories.AvgKcalDailyRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMacroRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyMealTimeRepositories;
 using GYM_Nutrition_Union.Persistence.Repositories.DailyNutritionDetailRepositories;
@@ -70,6 +73,7 @@ builder.Services.AddScoped(typeof(IDailyNutritionTotalsRepository), typeof(Daily
 builder.Services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
 builder.Services.AddScoped(typeof(IAppUserRepository), typeof(AppUserRepository));
 builder.Services.AddScoped(typeof(IDailyNutritionGetClosedByUserRepository), typeof(DailyNutritionGetClosedByUserRepository));
+builder.Services.AddScoped(typeof(IAvgKcalDailyRepository), typeof(AvgKcalDailyRepository));
 
 builder.Services.AddScoped<GetExerciseByIdQueryHandler>();
 builder.Services.AddScoped<GetExerciseQueryHandler>();
@@ -148,6 +152,10 @@ builder.Services.AddScoped<UpdateDailyMacroCommandHandler>();
 builder.Services.AddScoped<GetDailyMacroByIdQueryHandler>();
 builder.Services.AddScoped<GetDailyMacroQueryHandler>();
 builder.Services.AddScoped<GetLatestDailyMacroByUserIdQueryHandler>();
+
+builder.Services.AddScoped<CreateAvgKcalDailyCommandHandler>();
+builder.Services.AddScoped<GetAvgKcalDailyQueryHandler>();
+builder.Services.AddScoped<GetLatestAvgKcalDailyByUserIdQueryHandler>();
 
 builder.Services.AddScoped<GetDailyNutritionByUserIdAndDateQueryHandler>();
 
