@@ -100,6 +100,7 @@ builder.Services.AddScoped<GetAppUserDetailQueryHandler>();
 builder.Services.AddScoped<RemoveAppUserDetailCommandHandler>();
 builder.Services.AddScoped<UpdateAppUserDetailCommandHandler>();
 builder.Services.AddScoped<CreateAppUserDetailCommandHandler>();
+builder.Services.AddScoped<GetAppUserDetailByUserIdQueryHandler>();
 
 builder.Services.AddScoped<GetAppUserBodyDetailByIdQueryHandler>();
 builder.Services.AddScoped<GetAppUserBodyDetailQueryHandler>();

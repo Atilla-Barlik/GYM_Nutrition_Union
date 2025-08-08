@@ -1,4 +1,6 @@
 ﻿using GYM_Nurition.Domain.Entities;
+using GYM_Nutrition_Union.Application.Features.CQRS.Queries.AppUserDetailQueries;
+using GYM_Nutrition_Union.Application.Features.CQRS.Results.AppUserDetailResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +12,6 @@ namespace GYM_Nutrition_Union.Application.Interfaces.AppUserDetailInterfaces
     public interface IAppUserDetailRepository
     {
         Task<AppUserDetail> GetByUserId(int userId);
+        Task<GetAppUserDetailByIdQueryResult> getAppUserDetail(int userId);
     }
 }

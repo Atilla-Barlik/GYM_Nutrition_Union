@@ -1,6 +1,8 @@
 ﻿using GYM_Nutrition_Union.Application.Features.CQRS.Commands.AppUserDetailCommands;
 using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserDetailHandler;
+using GYM_Nutrition_Union.Application.Features.CQRS.Handlers.DailyMacroHandler;
 using GYM_Nutrition_Union.Application.Features.CQRS.Queries.AppUserDetailQueries;
+using GYM_Nutrition_Union.Application.Features.CQRS.Queries.DailyMacroQueries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,15 +17,16 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 		private readonly RemoveAppUserDetailCommandHandler _removeAppUserDetailCommandHandler;
 		private readonly GetAppUserDetailByIdQueryHandler _getAppUserDetailByIdQueryHandler;
 		private readonly GetAppUserDetailQueryHandler _getAppUserDetailQueryHandler;
-		
+		private readonly GetAppUserDetailByUserIdQueryHandler _getAppUserDetailByUserIdQueryHandler;
 
-		public AppUserDetailController(CreateAppUserDetailCommandHandler createAppUserDetailCommandHandler, UpdateAppUserDetailCommandHandler updateAppUserDetailCommandHandler, RemoveAppUserDetailCommandHandler removeAppUserDetailCommandHandler, GetAppUserDetailByIdQueryHandler getAppUserDetailByIdQueryHandler, GetAppUserDetailQueryHandler getAppUserDetailQueryHandler)
+        public AppUserDetailController(CreateAppUserDetailCommandHandler createAppUserDetailCommandHandler, UpdateAppUserDetailCommandHandler updateAppUserDetailCommandHandler, RemoveAppUserDetailCommandHandler removeAppUserDetailCommandHandler, GetAppUserDetailByIdQueryHandler getAppUserDetailByIdQueryHandler, GetAppUserDetailQueryHandler getAppUserDetailQueryHandler, GetAppUserDetailByUserIdQueryHandler getAppUserDetail)
 		{
 			_createAppUserDetailCommandHandler = createAppUserDetailCommandHandler;
 			_updateAppUserDetailCommandHandler = updateAppUserDetailCommandHandler;
 			_removeAppUserDetailCommandHandler = removeAppUserDetailCommandHandler;
 			_getAppUserDetailByIdQueryHandler = getAppUserDetailByIdQueryHandler;
 			_getAppUserDetailQueryHandler = getAppUserDetailQueryHandler;
+            _getAppUserDetailByUserIdQueryHandler = getAppUserDetail;
 		}
 
 		[HttpGet]
@@ -57,6 +60,15 @@ namespace GYM_Nutrition_Union.WebApi.Controllers
 			await _updateAppUserDetailCommandHandler.Handle(command);
 			return Ok("AppUserDetail Güncellendi.");
 		}
-		
-	}
+        [HttpGet("appUserDetails/{appUserId}")]
+        public async Task<IActionResult> GetUserDetails(int appUserId)
+        {
+            var result = await _getAppUserDetailByUserIdQueryHandler.Handle(new GetAppUserDetailsByAppUserIdQuery(appUserId));
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+    }
 }

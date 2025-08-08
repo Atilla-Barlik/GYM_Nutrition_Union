@@ -42,19 +42,38 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
             }
 
             // Değişkenleri ata
+            decimal volumeConfficient = 0.0015M;
+            decimal genderFactor = userDetail.sex == false ? 0.90M : 1.00M;
             decimal bodyWeight = userDetail.Weight;
             decimal baseMET = exerciseDetail.BaseMET;
-            decimal totalWeightLifted = command.ExerciseWeight * command.ExerciseRepeat * command.ExerciseSet;
+            decimal secondsPerRep = 3.0M;
+            decimal restBetweenSets = 60.0M;
+            decimal activeTimePerSet = command.ExerciseRepeat * secondsPerRep;
+            decimal totalTimeSeconds = command.ExerciseSet * (activeTimePerSet + restBetweenSets);
+            //decimal duration = command.ExerciseSet * (command.ExerciseRepeat * 0.5M);
+            decimal aerobicCalories = (baseMET * 3.5M * bodyWeight / 200) * (totalTimeSeconds/60); 
+            decimal resistanceVolume = command.ExerciseWeight * command.ExerciseRepeat * command.ExerciseSet;
+            decimal resistanceCalories = volumeConfficient * resistanceVolume;
+
+            decimal totalCalories = genderFactor * (aerobicCalories + resistanceCalories);
 
             // Dinamik MET Hesapla
-            decimal dynamicMET = baseMET + ((decimal)Math.Pow((double)totalWeightLifted, 0.6) /
-                               (decimal)Math.Pow((double)bodyWeight, 0.5) * 0.08M);
+            //decimal dynamicMET = baseMET + ((decimal)Math.Pow((double)totalWeightLifted, 0.6) /
+            //                   (decimal)Math.Pow((double)bodyWeight, 0.5) * 0.08M);
 
             // Egzersiz süresi tahmini (set başına 30 saniye)
-            decimal exerciseDuration = command.ExerciseSet * (command.ExerciseRepeat * 0.5M);
+            //decimal exerciseDuration = command.ExerciseSet * (command.ExerciseRepeat * 0.5M);
 
-            // Yakılan kaloriyi hesapla
-            decimal burnedCalories = dynamicMET * bodyWeight * 0.0175M * exerciseDuration;
+            //// Yakılan kaloriyi hesapla
+            //if(userDetail.sex = true)
+            //{
+            //    decimal burnedCalories = dynamicMET * bodyWeight * 0.0175M * exerciseDuration;
+            //}
+            //else
+            //{
+            //    decimal burnedCalories = dynamicMET * bodyWeight * 0.0175M * exerciseDuration;
+            //}
+            
 
             DateTime dateTime = DateTime.Now;
             DateOnly dateOnly = DateOnly.FromDateTime(dateTime);
@@ -66,7 +85,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
 				ExerciseSet = command.ExerciseSet,
 				ExerciseWeight = command.ExerciseWeight,
                 ExerciseDone = command.ExerciseDone,
-				ExerciseTotalBurnedKcal = (int)burnedCalories,
+				ExerciseTotalBurnedKcal = (int)totalCalories,
 				DayNo = command.DayNo,
 				Date = dateOnly
 			});

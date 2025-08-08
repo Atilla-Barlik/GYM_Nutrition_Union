@@ -41,15 +41,20 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
                 throw new Exception("User or Exercise not found");
             }
 
+            decimal volumeConfficient = 0.0015M;
+            decimal genderFactor = userDetail.sex == false ? 0.90M : 1.00M;
             decimal bodyWeight = userDetail.Weight;
             decimal baseMET = exerciseDetail.BaseMET;
-            decimal totalWeightLifted = command.ExerciseWeight * command.ExerciseRepeat * command.ExerciseSet;
+            decimal secondsPerRep = 3.0M;
+            decimal restBetweenSets = 60.0M;
+            decimal activeTimePerSet = command.ExerciseRepeat * secondsPerRep;
+            decimal totalTimeSeconds = command.ExerciseSet * (activeTimePerSet + restBetweenSets);
+            //decimal duration = command.ExerciseSet * (command.ExerciseRepeat * 0.5M);
+            decimal aerobicCalories = (baseMET * 3.5M * bodyWeight / 200) * (totalTimeSeconds / 60);
+            decimal resistanceVolume = command.ExerciseWeight * command.ExerciseRepeat * command.ExerciseSet;
+            decimal resistanceCalories = volumeConfficient * resistanceVolume;
 
-            decimal dynamicMET = baseMET + ((decimal)Math.Pow((double)totalWeightLifted, 0.6) /
-                               (decimal)Math.Pow((double)bodyWeight, 0.5) * 0.08M);
-
-            decimal exerciseDuration = command.ExerciseSet * (command.ExerciseRepeat * 0.5M);
-            decimal burnedCalories = dynamicMET * bodyWeight * 0.0175M * exerciseDuration;
+            decimal totalCalories = genderFactor * (aerobicCalories + resistanceCalories);
 
             DateTime dateTime = DateTime.Now;
             DateOnly dateOnly = DateOnly.FromDateTime(dateTime);
@@ -61,7 +66,7 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserExercise
 			values.ExerciseRepeat = command.ExerciseRepeat;
 			values.ExerciseWeight = command.ExerciseWeight;
             values.ExerciseDone = command.ExerciseDone;
-			values.ExerciseTotalBurnedKcal = (int)burnedCalories;
+			values.ExerciseTotalBurnedKcal = (int)totalCalories;
 			values.DayNo = command.DayNo;
 			values.Date = dateOnly;
 			await _repository.UpdateAsync(values);

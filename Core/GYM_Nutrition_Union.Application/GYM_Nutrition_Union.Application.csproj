@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\CQRS\Queries\NewFolder\" />
     <Folder Include="Features\Mediator\Commands\" />
     <Folder Include="Features\Mediator\Handlers\StatisticsHandlers\" />
     <Folder Include="Features\Mediator\Queries\StatisticsQueries\" />

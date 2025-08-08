@@ -12,12 +12,14 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler
 		private readonly IRepository<AppUser> _repository;
         private readonly IAppUserRepository _userRepository;
 		private readonly IPasswordHasher<AppUser> _passwordHasher;
+        private readonly IRepository<AppUserDetail> _userDetailRepository;
 
-		public CreateAppUserCommandHandler(IRepository<AppUser> repository, IPasswordHasher<AppUser> passwordHasher, IAppUserRepository appUserRepository)
+		public CreateAppUserCommandHandler(IRepository<AppUser> repository, IPasswordHasher<AppUser> passwordHasher, IAppUserRepository appUserRepository,IRepository<AppUserDetail> appuserDetail)
 		{
 			_repository = repository;
 			_passwordHasher = passwordHasher;
             _userRepository = appUserRepository;
+            _userDetailRepository = appuserDetail;
 		}
 
 		public async Task Handle(CreateAppUserCommand command)
@@ -36,11 +38,22 @@ namespace GYM_Nutrition_Union.Application.Features.CQRS.Handlers.AppUserHandler
                 AppUserEmail = command.AppUserEmail,
                 // AppUserPassword'ı henüz atlamıyoruz
             };
+            
 
             // Şifreyi hash’le
             user.AppUserPassword = _passwordHasher.HashPassword(user, command.AppUserPassword);
 
             await _repository.CreateAsync(user);
+            await _userDetailRepository.CreateAsync(new AppUserDetail
+            {
+                AppUserId = user.AppUserId,
+                AfterImage = " ",
+                BeforeImage = " ",
+                Length = 0,
+                sex = true,
+                Age = 0,
+                Weight = 0
+            });
         }
 	}
 }

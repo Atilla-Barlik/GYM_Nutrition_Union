@@ -21,7 +21,7 @@ namespace GYM_Nutrition_Union.Persistence.Repositories.NutrientRepositories
 
         public async Task<List<Nutrient>> GetNutrientByNameAsync(string name)
         {
-            return await _context.Nutrient.Where(n => n.Name.StartsWith(name)).ToListAsync();
+            return await _context.Nutrient.Where(n => n.Name.Contains(name)).ToListAsync();
         }
     }
 }
